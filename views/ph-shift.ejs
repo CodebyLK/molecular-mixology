@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Masterclass: Botanical Alchemy</title>
+    <link rel="stylesheet" href="/css/terminal.css">
+    <link rel="stylesheet" href="/css/ph-shift.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <header>
+            <h1><a href="/dashboard" style="color: var(--text-muted); text-decoration: none; font-size: 1.5rem;">&lt; Back</a> | Botanical Alchemy</h1>
+            <p>Exploring the pH-dependent color shifts of natural anthocyanins.</p>
+        </header>
+
+        <main style="max-width: 1000px; margin: 0 auto;">
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 4rem;">
+                
+                <div class="module-card" style="padding: 2.5rem;">
+                    <h3 style="margin-bottom: 1rem;">Select Botanical</h3>
+                    <select id="botanicalSelect" class="elegant-input" style="margin-bottom: 2rem;">
+                        <option value="pea">Butterfly Pea Flower</option>
+                        <option value="cabbage">Red Cabbage Extract</option>
+                        <option value="hibiscus">Hibiscus Flower</option>
+                        <option value="saffron">Saffron / Turmeric</option>
+                    </select>
+
+                    <h3 style="margin-bottom: 0.5rem;">Manipulate pH</h3>
+                    <p id="botanicalNotes" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; min-height: 50px;">
+                        </p>
+
+                    <input type="range" id="phInput" class="ph-slider" min="20" max="100" value="70">
+                    
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                        <span>Acidic (2.0)</span>
+                        <span>Neutral</span>
+                        <span>Alkaline (10.0)</span>
+                    </div>
+                </div>
+
+                <div class="magic-glass-container">
+                    <div class="magic-glass">
+                        <div id="liquid"></div>
+                    </div>
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;">Current State</span>
+                        <div id="phValueText" style="font-size: 3rem; margin-top: 0.5rem;">7.0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="module-card" style="padding: 3rem; background: rgba(30, 45, 70, 0.3); border-color: var(--accent-blue);">
+                <h2 id="recipeTitle" style="font-size: 2rem; margin-bottom: 0.5rem; text-align: center; color: var(--text-main);">
+                    </h2>
+                <p id="recipeDesc" style="text-align: center; color: var(--accent-blue); font-style: italic; margin-bottom: 2rem;">
+                    </p>
+                
+                <hr style="border: 0; border-bottom: 1px solid rgba(138, 180, 248, 0.2); margin-bottom: 2rem;">
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: var(--text-main); margin-bottom: 1rem;">The Botanical Prep</h3>
+                        <ul id="recipePrep" style="color: var(--text-muted); line-height: 1.8; padding-left: 1.2rem; font-size: 0.95rem;">
+                            </ul>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: var(--text-main); margin-bottom: 1rem;">The Build & The Show</h3>
+                        <ul id="recipeBuild" style="color: var(--text-muted); line-height: 1.8; padding-left: 1.2rem; font-size: 0.95rem;">
+                            </ul>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="/js/ph-engine.js"></script>
+</body>
+</html>

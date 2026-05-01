@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Masterclass: Stratification</title>
+    <link rel="stylesheet" href="/css/terminal.css">
+    <link rel="stylesheet" href="/css/stratification.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <header>
+            <h1><a href="/dashboard" style="color: var(--text-muted); text-decoration: none; font-size: 1.5rem;">&lt; Back</a> | Stratification</h1>
+            <p>Master the physics of liquid density and gravity-defying layers.</p>
+        </header>
+
+        <main style="max-width: 1000px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                
+                <div class="module-card" style="padding: 2.5rem;">
+                    <h3 style="margin-bottom: 1.5rem;">Select Ingredients</h3>
+                    <div id="ingredientList" style="display: grid; gap: 10px;">
+                        <label class="ingredient-item">
+                            <input type="checkbox" value="Grenadine" data-density="1.18" data-color="#c62828"> Grenadine (SG 1.18)
+                        </label>
+                        <label class="ingredient-item">
+                            <input type="checkbox" value="Simple Syrup" data-density="1.13" data-color="#fff9c4"> Simple Syrup (SG 1.13)
+                        </label>
+                        <label class="ingredient-item">
+                            <input type="checkbox" value="Blue Curacao" data-density="1.11" data-color="#0277bd"> Blue Curaçao (SG 1.11)
+                        </label>
+                        <label class="ingredient-item">
+                            <input type="checkbox" value="Orange Juice" data-density="1.04" data-color="#ffb300"> Orange Juice (SG 1.04)
+                        </label>
+                        <label class="ingredient-item">
+                            <input type="checkbox" value="Water" data-density="1.00" data-color="rgba(255,255,255,0.1)"> Water (SG 1.00)
+                        </label>
+                        <label class="ingredient-item">
+                            <input type="checkbox" value="Bourbon" data-density="0.94" data-color="#e65100"> Bourbon (SG 0.94)
+                        </label>
+                    </div>
+                    <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+                        The engine automatically sorts your selections by <strong>Specific Gravity</strong>. Heaviest liquids settle at the base.
+                    </p>
+                </div>
+
+                <div class="coupe-container">
+                    <div class="glass-bowl" id="glass"></div>
+                    <div class="glass-stem"></div>
+                    <div class="glass-base"></div>
+                </div>
+            </div>
+
+            <div class="module-card" style="padding: 3rem; background: rgba(30, 45, 70, 0.3); border-color: var(--accent-blue); margin-top: 4rem;">
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem; text-align: center;">Signature Serve: The New York Sour</h2>
+                <p style="text-align: center; color: var(--accent-blue); font-style: italic; margin-bottom: 2rem;">Mastering the 2:1:1 Ratio and the Tannic Float.</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3 style="color: var(--accent-blue);">1. The Base Ratio (2:1:1)</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">The foundation of almost every "Sour" style cocktail. This ratio ensures the spirit, the acid, and the sugar are in perfect equilibrium.</p>
+                        <ul style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.8;">
+                            <li><strong>2 parts Spirit:</strong> 2.0 oz Bourbon or Rye</li>
+                            <li><strong>1 part Acid:</strong> 1.0 oz Fresh Lemon Juice</li>
+                            <li><strong>1 part Sweet:</strong> 1.0 oz Simple Syrup (1:1)</li>
+                            <li><strong>Texture:</strong> 1 Egg White (Optional but recommended)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--accent-blue);">2. The Engineering</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;"><strong>The Shake:</strong> If using egg white, "Dry Shake" first without ice to build the foam, then "Wet Shake" with ice to chill/dilute.</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;"><strong>The Stratification:</strong> Strain into a rocks glass over fresh ice. Let the foam settle for 5 seconds.</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;"><strong>The Float:</strong> Slowly pour <strong>0.5 oz Dry Red Wine</strong> over the back of a bar spoon. The wine's lower density (approx 0.99) will keep it floating above the dense whiskey base (approx 1.10).</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/density-engine.js"></script>
+</body>
+</html>

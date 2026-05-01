@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Masterclass: Acid-Adjustment Result</title>
+    <link rel="stylesheet" href="/css/terminal.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <header>
+            <h1><a href="/modules/acid" style="color: var(--text-muted); text-decoration: none; font-size: 1.5rem;">&lt; Back</a> | The Formula</h1>
+            <p>Your precise chemical adjustments for perfectly balanced citrus.</p>
+        </header>
+
+        <main>
+            <div class="module-card" style="max-width: 600px; margin: 0 auto; padding: 3rem;">
+                
+                <h3 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">Target: <%= target.name %></h3>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 2.5rem; font-style: italic;">
+                    Adjusting <%= volume %>ml of <%= base.name %>
+                </p>
+
+                <hr style="border: 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 2.5rem;">
+
+                <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--accent-blue);">The Additions</h3>
+                
+                <ul style="list-style-type: none; padding: 0; margin: 0 0 2.5rem 0;">
+                    <li style="display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 10px;">
+                        <span style="font-weight: 600; letter-spacing: 1px;">Citric Acid Powder</span>
+                        <strong style="color: var(--accent-blue); font-family: monospace; font-size: 1.1rem;"><%= citricGrams %>g</strong>
+                    </li>
+                    
+                    <% if (malicGrams > 0) { %>
+                        <li style="display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 10px;">
+                            <span style="font-weight: 600; letter-spacing: 1px;">Malic Acid Powder</span>
+                            <strong style="color: var(--accent-blue); font-family: monospace; font-size: 1.1rem;"><%= malicGrams %>g</strong>
+                        </li>
+                    <% } %>
+                </ul>
+
+                <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--accent-blue);">Execution Notes</h3>
+                <p style="color: var(--text-main); font-size: 1rem; line-height: 1.8;">
+                    Using a precise gram scale, weigh the acid powders and whisk them directly into your <%= volume %>ml of <%= base.name %> until completely dissolved. Store chilled. Your liquid will now behave exactly like <%= target.name.toLowerCase() %> in any cocktail shaker.
+                </p>
+
+            </div>
+
+            <div class="module-card" style="padding: 3rem; background: rgba(30, 45, 70, 0.3); border-color: var(--accent-blue); margin-top: 4rem;">
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem; text-align: center; color: var(--text-main);">Signature Serve: Malic Pineapple Daiquiri</h2>
+                <p style="text-align: center; color: var(--accent-blue); font-style: italic; margin-bottom: 2rem;">A classic Daiquiri profile with the lush, tropical notes of pineapple instead of lime.</p>
+                
+                <hr style="border: 0; border-bottom: 1px solid rgba(138, 180, 248, 0.2); margin-bottom: 2rem;">
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: var(--text-main); margin-bottom: 1rem;">The Acid Prep</h3>
+                        <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 1.2rem;">
+                            <li>Use the calculator above to adjust fresh, cold-pressed Pineapple Juice to a <strong>Lime Profile (6.0% Total Acid)</strong>.</li>
+                            <li>Whisk the calculated Citric and Malic acid powders directly into the juice until fully dissolved.</li>
+                            <li>Bottle and keep chilled. Your pineapple juice now has the exact biting acidity and shelf-life of fresh lime juice.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: var(--text-main); margin-bottom: 1rem;">The Build</h3>
+                        <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 1.2rem;">
+                            <li><strong>2.0 oz</strong> Light Rum (Spanish style preferred)</li>
+                            <li><strong>1.0 oz</strong> Acid-Adjusted Pineapple Juice</li>
+                            <li><strong>0.75 oz</strong> Simple Syrup (1:1)</li>
+                            <li>Combine all ingredients in a shaker with large ice cubes.</li>
+                            <li>Shake vigorously until frost forms on the tin.</li>
+                            <li>Double strain into a chilled coupe glass. Garnish with a single pineapple frond.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+/* =========================================
+   MODULE: BOTANICAL ALCHEMY (pH SHIFT)
+   ========================================= */
+
+/* 1. The Interactive Stage */
+.magic-glass-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 350px;
+    margin: 2rem 0;
+}
+
+/* 2. The Glass Vessel */
+.magic-glass {
+    width: 160px;
+    height: 200px;
+    border: 4px solid rgba(255, 255, 255, 0.15);
+    border-top: 2px solid rgba(255, 255, 255, 0.4); /* Highlighted Rim */
+    border-radius: 5px 5px 30px 30px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* 3. The Liquid */
+#liquid {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 75%;
+    /* Hook for ph-engine.js to inject colors */
+    background-color: var(--liquid-color, #1A237E); 
+    transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.6s ease;
+}
+
+/* 4. The Interactive Slider Track */
+.ph-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    
+    /* CRITICAL: This variable is updated by JS. 
+       If JS isn't running, it defaults to a neutral slate gray.
+    */
+    background: var(--slider-bg, #2c3e50); 
+    
+    outline: none;
+    margin: 25px 0;
+    transition: background 0.5s ease; /* Smooths color-shifts when switching botanicals */
+}
+
+/* 5. The Slider Thumb (The "Handle") */
+.ph-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 3px solid var(--bg-color, #070B14);
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.ph-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.ph-slider::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 3px solid var(--bg-color, #070B14);
+    cursor: pointer;
+}
+
+/* 6. Text Labels */
+#phValueText {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--text-main);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+#botanicalNotes {
+    min-height: 60px;
+    font-style: italic;
+    color: var(--text-muted);
+}

@@ -1,0 +1,106 @@
+/* Stratification Module Styles */
+.glass-stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.cocktail-glass {
+    width: 140px;
+    height: 250px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top: none;
+    border-radius: 5px 5px 25px 25px;
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse; /* Stacks density from bottom up */
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.05);
+}
+
+.layer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* public/css/stratification.css */
+
+.coupe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem auto;
+    position: relative;
+}
+
+/* The Bowl */
+.glass-bowl {
+    width: 260px;
+    height: 180px;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    border-top: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 5px 5px 130px 130px;
+    display: flex;
+    flex-direction: column-reverse; /* Heavy layers to the bottom */
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* The Stem & Base */
+.glass-stem {
+    width: 14px;
+    height: 110px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.8) 25%, rgba(255,255,255,0.1) 75%, rgba(255,255,255,0.4) 100%);
+    margin-top: -2px;
+}
+
+.glass-base {
+    width: 140px;
+    height: 18px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0.05));
+    border-radius: 50% 50% 10px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* The Individual Liquid Layers */
+.liquid-layer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+    box-shadow: inset 0 -15px 25px rgba(0, 0, 0, 0.4), inset 0 5px 10px rgba(255, 255, 255, 0.1);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Add this to public/css/stratification.css */
+
+.liquid-layer span {
+    pointer-events: none; /* Prevents text from interfering with clicks */
+    text-align: center;
+}
+
+.liquid-layer small {
+    display: block;      /* Puts the SG on a new line for better fit */
+    font-size: 0.6rem;   /* Smaller than the ingredient name */
+    opacity: 0.7;        /* Fades it slightly for a high-end look */
+    margin-top: 2px;
+}
+
