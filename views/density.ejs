@@ -18,25 +18,20 @@
                 
                 <div class="module-card" style="padding: 2.5rem;">
                     <h3 style="margin-bottom: 1.5rem;">Select Ingredients</h3>
-                    <div id="ingredientList" style="display: grid; gap: 10px;">
-                        <label class="ingredient-item">
-                            <input type="checkbox" value="Grenadine" data-density="1.18" data-color="#c62828"> Grenadine (SG 1.18)
-                        </label>
-                        <label class="ingredient-item">
-                            <input type="checkbox" value="Simple Syrup" data-density="1.13" data-color="#fff9c4"> Simple Syrup (SG 1.13)
-                        </label>
-                        <label class="ingredient-item">
-                            <input type="checkbox" value="Blue Curacao" data-density="1.11" data-color="#0277bd"> Blue Curaçao (SG 1.11)
-                        </label>
-                        <label class="ingredient-item">
-                            <input type="checkbox" value="Orange Juice" data-density="1.04" data-color="#ffb300"> Orange Juice (SG 1.04)
-                        </label>
-                        <label class="ingredient-item">
-                            <input type="checkbox" value="Water" data-density="1.00" data-color="rgba(255,255,255,0.1)"> Water (SG 1.00)
-                        </label>
-                        <label class="ingredient-item">
-                            <input type="checkbox" value="Bourbon" data-density="0.94" data-color="#e65100"> Bourbon (SG 0.94)
-                        </label>
+                    <div id="ingredientList" style="display: grid; gap: 10px; max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                        <% if (reagents && reagents.length > 0) { %>
+                            <% reagents.forEach(function(reagent) { %>
+                                <label class="ingredient-item">
+                                    <input type="checkbox" 
+                                        value="<%= reagent.name %>" 
+                                        data-density="<%= reagent.specific_gravity %>" 
+                                        data-color="<%= reagent.hex_color %>"> 
+                                    <%= reagent.name %> (SG <%= reagent.specific_gravity %>)
+                                </label>
+                            <% }); %>
+                        <% } else { %>
+                            <p style="color: gray; font-style: italic;">No reagents found in the vault.</p>
+                        <% } %>
                     </div>
                     <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
                         The engine automatically sorts your selections by <strong>Specific Gravity</strong>. Heaviest liquids settle at the base.
