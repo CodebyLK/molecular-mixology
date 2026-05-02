@@ -1,0 +1,248 @@
+/* =========================================
+   THE LABORATORY PANTRY (public/css/pantry.css)
+   ========================================= */
+
+/* --- RESET & BASE --- */
+body {
+    margin: 0;
+    background-color: #050505; /* Deep lab black */
+    color: #eee;
+    font-family: 'Fira Code', 'Courier New', monospace; /* Default to mono for that tech feel */
+}
+
+.pantry-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 5% 8rem 5%;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+/* --- TYPOGRAPHY --- */
+.lab-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    letter-spacing: -1px;
+}
+
+.lab-subtitle {
+    color: #888;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin-bottom: 2rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+}
+
+.back-link:hover {
+    color: #fff;
+    transform: translateX(-5px);
+}
+
+/* --- CONTROL PANEL (THE CONSOLE) --- */
+.control-panel {
+    background: rgba(15, 15, 15, 0.8) !important; 
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-left: 4px solid #d4af37;
+    padding: 1.5rem 2.5rem;
+    border-radius: 4px;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.control-group label {
+    color: #ccc;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+}
+
+.control-panel select {
+    background-color: #000 !important; 
+    color: #d4af37 !important;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    appearance: none; 
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.control-panel select:hover {
+    border-color: #d4af37;
+}
+
+/* Premium Gold Button */
+.protocol-btn {
+    background: transparent; 
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    padding: 12px 30px;
+    border: 1px solid #d4af37;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+}
+
+.protocol-btn:hover {
+    background: #d4af37;
+    color: #000;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+/* --- THE LABORATORY REPORT (AI RESULT) --- */
+.ai-result-panel {
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-top: 5px solid #d4af37;
+    padding: 2.5rem;
+    border-radius: 4px;
+    margin-bottom: 4rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.report-header h3 {
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
+    font-size: 1.8rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.report-id {
+    font-family: 'Fira Code', monospace;
+    color: #444;
+    font-size: 0.8rem;
+}
+
+.lab-divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, #d4af37, transparent);
+    margin-bottom: 2rem;
+}
+
+.protocol-content {
+    color: #ddd;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+/* Style for the 'Stealth Learning' rationale */
+.protocol-content em, .protocol-content i {
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    display: block;
+    margin: 1rem 0;
+}
+
+/* Style for missing items mentioned by AI */
+.critical-acquisition {
+    color: #ffcc00;
+    background: rgba(255, 204, 0, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 204, 0, 0.3);
+}
+
+/* --- REAGENT VAULT --- */
+.category-title {
+    color: #d4af37; 
+    font-family: 'Playfair Display', serif; 
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    padding-bottom: 8px;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.reagent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.pantry-item {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 2px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+}
+
+.pantry-item:hover {
+    background: rgba(212, 175, 55, 0.05);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+.reagent-checkbox {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+    accent-color: #d4af37;
+    cursor: pointer;
+}
+
+.reagent-name {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.95rem;
+    color: #ccc;
+    transition: color 0.2s;
+}
+
+.pantry-item:hover .reagent-name {
+    color: #fff;
+}
+
+.empty-msg {
+    color: #555;
+    font-style: italic;
+    text-align: center;
+    margin-top: 4rem;
+}
