@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakeasy | Archives</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/terminal.css">
+
+    <link rel="stylesheet" href="/css/layout.css">
+
+    <link rel="stylesheet" href="/css/journal.css">
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<div class="journal-container">
+    <h1 class="journal-title">Laboratory Archives</h1>
+
+    <main>
+        <% if (notes && notes.length > 0) { %>
+            <% notes.forEach(function(note) { %>
+
+                <details class="recipe-accordion">
+
+                    <summary class="recipe-summary">
+                        <div class="summary-left">
+                                <span class="recipe-meta">
+                                    <%= note.module_used %> &bull; <%= note.date_created.toLocaleDateString() %>
+                                </span>
+                            <h2><%= note.target_drink %></h2>
+                        </div>
+                        <div class="summary-right">
+                            <span class="expand-indicator"></span>
+                        </div>
+                    </summary>
+
+                    <div class="accordion-content">
+                        <div class="protocol-display"><%= note.ai_protocol %></div>
+                    </div>
+
+                </details>
+
+            <% }); %>
+        <% } else { %>
+            <div class="empty-state">
+                <p>Your archives are currently silent.</p>
+            </div>
+        <% } %>
+    </main>
+</div>
+
+</body>
+</html>

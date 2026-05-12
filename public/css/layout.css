@@ -1,0 +1,43 @@
+/* /public/css/layout.css */
+
+.lab-nav {
+    padding: 20px 40px;
+    background: transparent;
+    font-family: 'Fira Code', monospace; /* Keeps the clean sci-fi font just for nav */
+}
+
+.nav-brand {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.module-title {
+    color: #4a90e2; /* Matching the soft blue of your subheadings */
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+.nav-links a {
+    color: #4a90e2; /* Matching your theme's blue link color */
+    text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Optional: style for the signout button if you want it distinct */
+.nav-links .lock-btn {
+    color: #a0aec0;
+}

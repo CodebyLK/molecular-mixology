@@ -4,8 +4,8 @@ const { GoogleGenAI } = require('@google/genai');
 const Formulation = require('../models/Formulation');
 
 // Initialize the 2026 Stable SDK
-const ai = new GoogleGenAI({ 
-    apiKey: process.env.GEMINI_API_KEY 
+const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY
 });
 
 router.post('/generate-formulation', async (req, res) => {
@@ -16,8 +16,8 @@ router.post('/generate-formulation', async (req, res) => {
             return res.status(400).json({ success: false, error: "No reagents selected." });
         }
 
-        const techniqueInstruction = module_used === "auto" 
-            ? "Analyze the reagents and select the ONE technique that best elevates this specific flavor profile." 
+        const techniqueInstruction = module_used === "auto"
+            ? "Analyze the reagents and select the ONE technique that best elevates this specific flavor profile."
             : `Focus specifically on the "${module_used}" technique.`;
 
         // Refined prompt using your "Speakeasy Scientist" rules
@@ -55,12 +55,22 @@ router.post('/generate-formulation', async (req, res) => {
 
         const aiOutput = response.text;
 
+        // 🧠 DYNAMIC NAME EXTRACTOR
+        // Scans the text for "Protocol Name:", bypasses any markdown formatting symbols,
+        // and safely isolates the exact title name.
+        let dynamicTitle = "Lab Synthesis"; // Fallback placeholder
+        const nameMatch = aiOutput.match(/Protocol Name:\s*\**([^*%\n\r]+)\**/i);
+        if (nameMatch && nameMatch[1]) {
+            dynamicTitle = nameMatch[1].trim();
+        }
+
         const newFormulation = new Formulation({
+            user_id: req.session.userId,
             module_used: module_used,
-            target_drink: "Lab Synthesis",
+            target_drink: dynamicTitle, // <-- Saved dynamically from the AI output
             ai_protocol: aiOutput
         });
-        
+
         await newFormulation.save();
         res.json({ success: true, protocol: aiOutput });
 

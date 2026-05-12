@@ -86,7 +86,7 @@ router.post('/signin', async (req, res) => {
             // SUCCESS: Create the session
             req.session.userId = user._id;
             console.log("✅ [DEBUG] Vault Unlocked!");
-            res.redirect('/pantry');
+            res.redirect('/modules/pantry');
         } else {
             // FAILURE: Wrong credentials
             console.log("❌ [DEBUG] Invalid Credentials");
@@ -96,6 +96,25 @@ router.post('/signin', async (req, res) => {
         console.error("💥 [DEBUG] Signin Crash:", err.message);
         res.status(500).send("The authentication engine is offline.");
     }
+});
+
+router.get('/signout', (req, res) => {
+    // 1. Destroy the session on the server
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("💥 [DEBUG] Failed to destroy session:", err);
+            return res.redirect('/pantry'); // If it fails, keep them on the dashboard
+        }
+
+        // 2. Clear the cookie from the browser
+        // Note: 'connect.sid' is the default cookie name for express-session
+        res.clearCookie('connect.sid');
+
+        console.log("🔒 [DEBUG] Session Terminated. Vault Locked.");
+
+        // 3. Redirect back to the front door
+        res.redirect('/signin');
+    });
 });
 
 module.exports = router;

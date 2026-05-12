@@ -33,6 +33,7 @@ const densityRoutes = require('./routes/density');
 const acidRouter = require('./routes/acid');
 const phShiftRouter = require('./routes/ph-shift');
 const spherificationRouter = require('./routes/spherification');
+const journalRouter = require('./routes/journal');
 
 // --- ROUTE DEFINITION ---
 
@@ -53,6 +54,7 @@ app.use('/modules/density', protect, densityRoutes);
 app.use('/modules/acid', protect, acidRouter);
 app.use('/modules/ph-shift', protect, phShiftRouter);
 app.use('/modules/spherification', protect, spherificationRouter);
+app.use('/modules/journal', protect, journalRouter);
 
 // --- DATABASE CONNECTION ---
 const dbURL = process.env.MONGO_URI;

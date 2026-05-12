@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
 });
 
 // A "pre-save" hook to scramble the password before it hits the database
-// A "pre-save" hook to scramble the password before it hits the database
 userSchema.pre('save', async function() {
     // 1. Only hash the password if it has been modified (or is new)
     if (!this.isModified('password')) return;
