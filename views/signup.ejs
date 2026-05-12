@@ -5,41 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakeasy | Lab Registration</title>
     <link rel="stylesheet" href="/css/terminal.css">
-    <link rel="stylesheet" href="/css/pantry.css">
+    <link rel="stylesheet" href="/css/auth.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
 </head>
-<body style="display: flex; align-items: center; justify-content: center; height: 100vh; background: #050505;">
+<body class="auth-body">
 
-<div class="ai-result-panel" style="width: 100%; max-width: 400px; border-radius: 8px;">
-    <div class="report-header">
-        <h3 style="letter-spacing: 2px;">NEW RECRUIT</h3>
-        <span class="report-id">SEC-ORD: 001</span>
+<div class="auth-panel">
+    <div class="auth-header">
+        <h3 class="auth-title">NEW RECRUIT</h3>
+        <span class="auth-id">SEC-ORD: 001</span>
     </div>
-    <hr class="lab-divider">
 
-    <p class="lab-subtitle" style="font-size: 0.9rem; margin-bottom: 2rem;">Apply for laboratory credentials to access the Alchemist's Database.</p>
+    <p class="auth-subtitle">Apply for laboratory credentials to access the Alchemist's Database.</p>
 
     <form action="/signup" method="POST">
-        <div class="control-group" style="flex-direction: column; align-items: flex-start; margin-bottom: 1.5rem;">
-            <label style="font-size: 0.9rem; margin-bottom: 0.5rem;">Username</label>
-            <input type="text" name="username" required style="width: 100%; background: #000; border: 1px solid rgba(212, 175, 55, 0.4); padding: 12px; color: #fff; font-family: 'Fira Code', monospace; border-radius: 4px;">
+        <div class="auth-control-group">
+            <label for="usernameInput" class="auth-label">Username</label>
+            <input id="usernameInput" type="text" name="username" required class="auth-input">
         </div>
 
-        <div class="control-group" style="flex-direction: column; align-items: flex-start; margin-bottom: 1.5rem;">
-            <label style="font-size: 0.9rem; margin-bottom: 0.5rem;">Email Address</label>
-            <input type="email" name="email" required style="width: 100%; background: #000; border: 1px solid rgba(212, 175, 55, 0.4); padding: 12px; color: #fff; font-family: 'Fira Code', monospace; border-radius: 4px;">
+        <div class="auth-control-group">
+            <label for="emailInput" class="auth-label">Email Address</label>
+            <input id="emailInput" type="email" name="email" required class="auth-input">
         </div>
 
-        <div class="control-group" style="flex-direction: column; align-items: flex-start; margin-bottom: 2rem;">
-            <label style="font-size: 0.9rem; margin-bottom: 0.5rem;">Access Code (Password)</label>
-            <input type="password" name="password" required style="width: 100%; background: #000; border: 1px solid rgba(212, 175, 55, 0.4); padding: 12px; color: #fff; font-family: 'Fira Code', monospace; border-radius: 4px;">
+        <div class="auth-control-group">
+            <label for="passwordInput" class="auth-label">Access Code</label>
+            <input id="passwordInput" type="password" name="password" required class="auth-input">
         </div>
 
-        <button type="submit" class="protocol-btn" style="width: 100%;">Authorize Account</button>
+        <button type="submit" class="auth-btn">Authorize Account</button>
     </form>
 
-    <p style="margin-top: 1.5rem; font-size: 0.8rem; color: #888; text-align: center;">
-        Already credentialed? <a href="/signin" style="color: #d4af37; text-decoration: none;">Unlock Vault</a>
+    <p class="auth-footer-text">
+        Already credentialed? <a href="/signin" class="auth-link">Unlock Vault</a>
     </p>
 </div>
 
