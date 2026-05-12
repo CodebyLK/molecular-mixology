@@ -2,58 +2,66 @@
 require('dotenv').config();
 
 const express = require('express');
+const session = require('express-session');
 const mongoose = require('mongoose');
+const protect = require('./middleware/auth');
+
+// Models (Optional here if routes handle them, but good for top-level tasks)
 const Reagent = require('./models/Reagent');
 const Formulation = require('./models/Formulation');
 
-
-
 const app = express();
 
+// Middleware & View Engine
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // <-- ADD THIS LINE
+app.use(express.json());
 
-// Import the routes
+// Session Configuration (Must be before routes)
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'alchemy-secret-key', // Use .env for the secret!
+    resave: false,
+    saveUninitialized: false
+}));
+
+// --- ROUTE IMPORTATION ---
+const authRouter = require('./routes/auth');
+const pantryRouter = require('./routes/pantry');
+const apiRouter = require('./routes/api');
 const densityRoutes = require('./routes/density');
 const acidRouter = require('./routes/acid');
 const phShiftRouter = require('./routes/ph-shift');
 const spherificationRouter = require('./routes/spherification');
-const pantryRouter = require('./routes/pantry');
-const apiRouter = require('./routes/api');
 
+// --- ROUTE DEFINITION ---
 
+// Public Routes (No 'protect' needed)
+app.use('/', authRouter);
 
-// Tell Express: "Any traffic going to /modules/density should be handled by the densityRoutes file"
-app.use('/modules/density', densityRoutes);
-app.use('/modules/acid', acidRouter);
-app.use('/modules/ph-shift', phShiftRouter);
-app.use('/modules/spherification', spherificationRouter);
-app.use('/modules/pantry', pantryRouter);
-app.use('/api', apiRouter);
-
-// 2. Pull the secure URL from the .env file
-const dbURL = process.env.MONGO_URI; 
-
-// 3. Connect to the Atlas Cluster
-mongoose.connect(dbURL)
-    .then(() => {
-        console.log("✅ Success: Connected to MongoDB Atlas Cloud Cluster!");
-    })
-    .catch((error) => {
-        console.error("❌ Error: Could not connect to Atlas.", error);
-    });
-
-app.get('/dashboard', (req, res) => {
-    res.render('dashboard'); 
+// Protected Routes (The "Locked Door" logic)
+// All 'Main Pages' and the API must use the 'protect' middleware
+app.get('/dashboard', protect, (req, res) => {
+    res.render('dashboard');
 });
 
-// Don't forget to import your model at the VERY TOP of server.js:
-// const Reagent = require('./models/Reagent');
+app.use('/modules/pantry', protect, pantryRouter);
+app.use('/api', protect, apiRouter);
 
+// Module Routes (These are also main pages and should be protected)
+app.use('/modules/density', protect, densityRoutes);
+app.use('/modules/acid', protect, acidRouter);
+app.use('/modules/ph-shift', protect, phShiftRouter);
+app.use('/modules/spherification', protect, spherificationRouter);
 
+// --- DATABASE CONNECTION ---
+const dbURL = process.env.MONGO_URI;
 
+mongoose.connect(dbURL)
+    .then(() => console.log("✅ Success: Connected to MongoDB Atlas Cloud Cluster!"))
+    .catch((error) => console.error("❌ Error: Could not connect to Atlas.", error));
+
+// Server Activation
 app.listen(3000, () => {
     console.log("🚀 Terminal online at http://localhost:3000");
 });
