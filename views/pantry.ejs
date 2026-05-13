@@ -4,74 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakeasy | The Laboratory</title>
-    
-    <link rel="stylesheet" href="/css/terminal.css"> 
-    <link rel="stylesheet" href="/css/pantry.css">
-    <link rel="stylesheet" href="/css/layout.css">
+
+    <link rel="stylesheet" href="/css/terminal.css?v=3">
+    <link rel="stylesheet" href="/css/layout.css?v=3">
+    <link rel="stylesheet" href="/css/pantry.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <%- include('partials/header') %>
 
-    <div class="pantry-wrapper">
-        
-        <a href="/dashboard" class="back-link">⬅ Back to Dashboard</a>
-        
-        <div class="pantry-header">
-            <h1 class="lab-title">🧪 The Laboratory</h1>
-            <p class="lab-subtitle">Catalog your available reagents. The Alchemist will synthesize a protocol based on chemical compatibility and sensory balance.</p>
+<div class="pantry-wrapper">
+
+    <div class="pantry-header">
+        <h1 class="lab-title">🧪 The Laboratory</h1>
+        <p class="lab-subtitle">Catalog your available reagents. The Alchemist will synthesize a protocol based on chemical compatibility and sensory balance.</p>
+    </div>
+
+    <div class="control-panel">
+        <div class="control-group">
+            <label for="techniqueSelect">Target Technique</label>
+            <select id="techniqueSelect">
+                <option value="auto" selected>✨ Alchemist's Choice (Discovery Mode)</option>
+                <option value="Density & Stratification">Density & Stratification</option>
+                <option value="Encapsulation">Encapsulation</option>
+                <option value="Acid-Adjustment">Acid-Adjustment</option>
+                <option value="Botanical Alchemy">Botanical Alchemy</option>
+            </select>
         </div>
+        <button id="generateBtn" class="protocol-btn">Initiate Protocol</button>
+    </div>
 
-        <div class="control-panel">
-            <div class="control-group">
-                <label for="techniqueSelect">Target Technique</label>
-                <select id="techniqueSelect">
-                    <option value="auto" selected>✨ Alchemist's Choice (Discovery Mode)</option>
-                    <option value="Density & Stratification">Density & Stratification</option>
-                    <option value="Encapsulation">Encapsulation</option>
-                    <option value="Acid-Adjustment">Acid-Adjustment</option>
-                    <option value="Botanical Alchemy">Botanical Alchemy</option>
-                </select>
-            </div>
-            <button id="generateBtn" class="protocol-btn">Initiate Protocol</button>
+    <div id="aiResult" class="ai-result-panel" style="display: none;">
+        <div class="report-header">
+            <h3>🔬 Formulated Protocol</h3>
+            <span class="report-id">Ref: <%= new Date().getTime().toString().slice(-6) %></span>
         </div>
+        <hr class="lab-divider">
+        <div id="protocolOutput" class="protocol-content"></div>
+    </div>
 
-        <div id="aiResult" class="ai-result-panel" style="display: none;">
-            <div class="report-header">
-                <h3>🔬 Formulated Protocol</h3>
-                <span class="report-id">Ref: <%= new Date().getTime().toString().slice(-6) %></span>
-            </div>
-            <hr class="lab-divider">
-            <div id="protocolOutput" class="protocol-content">
-                </div>
-        </div>
+    <div class="search-container" style="margin-bottom: 20px;">
+        <input type="text" id="reagentSearch" class="vault-search" placeholder="🔍 Search the vault for reagents, acids, or botanicals...">
+    </div>
 
-        <div class="vault-container">
-            <% if (reagents && reagents.length > 0) { %>
-                <% let currentCategory = ''; %>
-                <% reagents.forEach(function(reagent) { %>
-                    
-                    <% if (reagent.category !== currentCategory) { %>
-                        <% if (currentCategory !== '') { %> </div> <% } %>
-                        <h3 class="category-title"><%= reagent.category %> Reagents</h3>
-                        <div class="reagent-grid">
-                        <% currentCategory = reagent.category; %>
-                    <% } %>
+    <div class="vault-container">
+        <% if (reagents && reagents.length > 0) { %>
+            <% let currentCategory = ''; %>
+            <% let isFirst = true; %>
+            <% reagents.forEach(function(reagent) { %>
 
-                    <label class="pantry-item">
-                        <input type="checkbox" class="reagent-checkbox" value="<%= reagent.name %>"> 
-                        <span class="reagent-name"><%= reagent.name %></span>
-                    </label>
+                <% if (reagent.category !== currentCategory) { %>
+                    <% if (currentCategory !== '') { %>
+    </div>
+    </details>
+    <% } %>
 
-                <% }); %>
-                </div> 
-            <% } else { %>
-                <p class="empty-msg">The reagent vault is currently empty.</p>
+    <details class="vault-drawer" <%= isFirst ? 'open' : '' %>>
+        <summary class="category-title">
+            <span><%= reagent.category %> Reagents</span>
+            <span class="drawer-icon">▼</span>
+        </summary>
+        <div class="reagent-grid">
+
+            <% currentCategory = reagent.category; %>
+            <% isFirst = false; %>
             <% } %>
-        </div>
 
-    </div> 
-    <script src="/js/pantry-engine.js"></script>
+            <label class="pantry-item">
+                <input type="checkbox" class="reagent-checkbox" value="<%= reagent.name %>">
+                <span class="reagent-name"><%= reagent.name %></span>
+            </label>
+
+            <% }); %>
+
+            <% if (currentCategory !== '') { %>
+        </div>
+    </details>
+    <% } %>
+
+    <% } else { %>
+        <p class="empty-msg">The reagent vault is currently empty.</p>
+    <% } %>
+</div>
+
+</div>
+<script src="/js/pantry-engine.js"></script>
 </body>
 </html>

@@ -66,3 +66,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// ==========================================
+// VAULT UI INTERACTIONS (Search & Filter)
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('reagentSearch');
+    const drawers = document.querySelectorAll('.vault-drawer');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            drawers.forEach(drawer => {
+                let hasVisibleItems = false;
+                const items = drawer.querySelectorAll('.pantry-item');
+
+                items.forEach(item => {
+                    const name = item.querySelector('.reagent-name').innerText.toLowerCase();
+
+                    // Toggle visibility based on match
+                    if (name.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                        hasVisibleItems = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Auto-expand drawer if searching, otherwise leave it alone
+                if (searchTerm !== '') {
+                    drawer.open = true;
+                }
+
+                // Hide the entire drawer if it contains no matching reagents
+                drawer.style.display = hasVisibleItems ? 'block' : 'none';
+            });
+        });
+    }
+});

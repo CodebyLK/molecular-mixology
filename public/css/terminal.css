@@ -1,24 +1,23 @@
 /* public/css/terminal.css */
 
-/* 1. Import Luxury Fonts: Playfair (Headers) & Montserrat (Body) */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
-    --bg-color: #070B14;         /* Midnight blue, almost pitch black */
-    --glass-surface: rgba(20, 30, 50, 0.4); /* Dark, moody frosted glass */
-    --glass-border: rgba(120, 160, 255, 0.1);  /* Barely-there ice blue edge */
-    --accent-blue: #8AB4F8;      /* Soft, elegant ice blue (no longer neon) */
-    --accent-glow: rgba(138, 180, 248, 0.15);    
-    --text-main: #F8F9FA;        /* Pure crisp white */
-    --text-muted: #9AA0A6;       /* Soft ash gray */
+    --bg-color: #070B14;
+    --glass-surface: rgba(20, 30, 50, 0.4);
+    --glass-border: rgba(120, 160, 255, 0.1);
+    --accent-blue: #8AB4F8;
+    --accent-glow: rgba(138, 180, 248, 0.15);
+    --text-main: #F8F9FA;
+    --text-muted: #9AA0A6;
 }
 
 body {
     background-color: var(--bg-color);
-    /* Creates a cinematic "spotlight" hitting a dark table */
-    background-image: radial-gradient(circle at 50% -10%, #17243B 0%, transparent 60%);
+    /* Deepened gradient so the dashboard doesn't look washed out */
+    background-image: radial-gradient(circle at 50% 0%, #0B132B 0%, transparent 70%);
     color: var(--text-main);
-    font-family: 'Montserrat', sans-serif; 
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
@@ -27,10 +26,9 @@ body {
 .terminal-container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 4rem 2rem; /* More breathing room at the top */
+    padding: 4rem 2rem;
 }
 
-/* 🍷 The High-End Typography */
 header {
     text-align: center;
     border-bottom: 1px solid var(--glass-border);
@@ -39,7 +37,7 @@ header {
 }
 
 h1, h2, h3 {
-    font-family: 'Playfair Display', serif; /* The classy restaurant menu font */
+    font-family: 'Playfair Display', serif;
     color: var(--text-main);
     font-weight: 400;
     letter-spacing: 1px;
@@ -58,27 +56,23 @@ header p {
     margin-top: 0;
 }
 
-/* The Dashboard Grid */
 .module-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
 }
 
-/* 🧊 The Menu Cards */
 .module-card {
     background: var(--glass-surface);
     border: 1px solid var(--glass-border);
-    border-radius: 8px; /* Sharper, more elegant corners */
+    border-radius: 8px;
     padding: 2.5rem 2rem;
     text-decoration: none;
     color: var(--text-main);
     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -99,15 +93,13 @@ header p {
     margin: 0;
 }
 
-/* The Subtle, Expensive Hover Interaction */
 .module-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(138, 180, 248, 0.4); /* Border softly catches the light */
+    border-color: rgba(138, 180, 248, 0.4);
     box-shadow: 0 15px 40px var(--accent-glow);
     background: rgba(30, 45, 70, 0.5);
 }
 
-/* 🟦 The Masterclass Button */
 button[type="submit"] {
     background-color: transparent;
     color: var(--accent-blue);
@@ -122,7 +114,7 @@ button[type="submit"] {
     transition: all 0.4s ease;
     text-transform: uppercase;
     display: block;
-    margin: 2rem auto 0; /* Centers the button perfectly */
+    margin: 2rem auto 0;
 }
 
 button[type="submit"]:hover {
@@ -130,10 +122,6 @@ button[type="submit"]:hover {
     color: #000;
     box-shadow: 0 0 20px var(--accent-glow);
 }
-
-/* =========================================
-   MODULE SPECIFIC: The Coupe Glass
-   ========================================= */
 
 .coupe-container {
     display: flex;
@@ -143,15 +131,14 @@ button[type="submit"]:hover {
     position: relative;
 }
 
-/* 1. The Bowl (Holds the liquids) */
 .glass-bowl {
     width: 260px;
     height: 150px;
     border: 3px solid rgba(255, 255, 255, 0.4);
-    border-top: 2px solid rgba(255, 255, 255, 0.6); /* The Rim */
-    border-radius: 5px 5px 130px 130px; /* Creates the perfect semi-circle coupe curve */
+    border-top: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 5px 5px 130px 130px;
     display: flex;
-    flex-direction: column-reverse; /* Stacks liquids from bottom to top */
+    flex-direction: column-reverse;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.05);
     position: relative;
@@ -159,7 +146,6 @@ button[type="submit"]:hover {
     z-index: 3;
 }
 
-/* The 3D Glare on the Bowl */
 .glass-bowl::after {
     content: '';
     position: absolute;
@@ -173,59 +159,48 @@ button[type="submit"]:hover {
     z-index: 10;
 }
 
-/* 2. The Stem */
 .glass-stem {
     width: 14px;
     height: 110px;
-    /* Gradient makes it look cylindrical and glassy */
     background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.8) 25%, rgba(255,255,255,0.1) 75%, rgba(255,255,255,0.4) 100%);
     border-left: 1px solid rgba(255, 255, 255, 0.4);
     border-right: 1px solid rgba(255, 255, 255, 0.4);
     position: relative;
-    margin-top: -2px; /* Pulls it up slightly so it connects seamlessly to the bowl */
+    margin-top: -2px;
     z-index: 2;
 }
 
-/* 3. The Base */
 .glass-base {
     width: 140px;
     height: 18px;
     background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0.05));
-    border-radius: 50% 50% 10px 10px; /* Slight dome shape */
+    border-radius: 50% 50% 10px 10px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-bottom: 2px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 8px 20px rgba(0,0,0,0.6);
     z-index: 1;
 }
 
-/* The Liquids (Upgraded for Realism) */
 .liquid-layer {
-    flex-grow: 1; 
+    flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.9); /* Softens the stark white text */
-    font-size: 0.75rem; /* Slightly smaller for a more refined look */
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 1px;
     text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
-    border-top: 1px solid rgba(255,255,255,0.2); 
+    border-top: 1px solid rgba(255,255,255,0.2);
     border-bottom: 1px solid rgba(0,0,0,0.5);
     position: relative;
-    z-index: 1; 
-    
-    /* THE MAGIC: Injects 3D volume into the flat database colors */
+    z-index: 1;
     box-shadow: inset 0 -15px 25px rgba(0, 0, 0, 0.5), inset 0 5px 10px rgba(255, 255, 255, 0.15);
 }
 
-/* THE FIX: Target only the very bottom liquid layer to save the text */
 .glass-bowl .liquid-layer:first-child {
-    padding-bottom: 20px; /* Pushes the text up away from the tight bottom curve */
+    padding-bottom: 20px;
 }
-
-/* =========================================
-   UI COMPONENTS: Forms & Inputs
-   ========================================= */
 
 .form-group {
     margin-bottom: 1.8rem;
@@ -237,7 +212,7 @@ label {
     color: var(--accent-blue);
     letter-spacing: 0.5px;
     font-size: 1.1rem;
-    display: block; /* Ensures label sits above the input */
+    display: block;
 }
 
 .elegant-input {
@@ -261,7 +236,6 @@ label {
     box-shadow: 0 0 15px var(--accent-glow);
 }
 
-/* Styles the dropdown options so they aren't stark white */
 option {
     background-color: var(--bg-color);
     color: var(--text-main);

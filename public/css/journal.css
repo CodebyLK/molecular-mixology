@@ -1,103 +1,105 @@
 /* /public/css/journal.css */
 
-/* Target the body ONLY on pages that load this stylesheet */
-body {
-    background: radial-gradient(circle at top, #141e30 0%, #060b14 100%) !important;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-}
+/* We no longer need a body background rule here!
+   It will automatically inherit the beautiful spotlight gradient from terminal.css */
 
 .journal-container {
     max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
 .journal-title {
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
     text-align: center;
-    color: #ffffff;
+    color: var(--text-main);
     margin-bottom: 50px;
     font-weight: 400;
 }
 
 /* The main accordion container */
 .recipe-accordion {
-    background: rgba(16, 26, 47, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
+    background: var(--glass-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px; /* Matched to your dashboard cards */
     margin-bottom: 15px;
     overflow: hidden;
-    transition: background 0.3s ease, border-color 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    backdrop-filter: blur(20px);
 }
 
-/* Subtle highlight glow when the archive entry is expanded */
+/* Hover & Open States matched to your module-cards */
+.recipe-accordion:hover {
+    border-color: rgba(138, 180, 248, 0.4);
+    background: rgba(30, 45, 70, 0.5);
+}
+
 .recipe-accordion[open] {
-    background: rgba(16, 26, 47, 0.7);
-    border-color: rgba(74, 144, 226, 0.4);
+    border-color: var(--accent-blue);
+    box-shadow: 0 15px 40px var(--accent-glow);
+    background: rgba(30, 45, 70, 0.5);
 }
 
-/* Clickable header bar wrapper */
+/* Clickable header bar */
 .recipe-summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 25px;
     cursor: pointer;
-    list-style: none; /* Removes default browser triangle marker */
+    list-style: none;
 }
 
-/* Hide default disclosure triangle for WebKit browsers */
 .recipe-summary::-webkit-details-marker {
     display: none;
 }
 
 .recipe-summary h2 {
     font-family: 'Playfair Display', serif;
-    color: #ffffff;
+    color: var(--text-main);
     margin: 5px 0 0 0;
     font-size: 1.4rem;
-    font-weight: 400;
 }
 
 .recipe-meta {
-    font-size: 0.7rem;
-    color: #4a90e2;
+    font-size: 0.75rem;
+    color: var(--accent-blue);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     display: block;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 5px;
 }
 
 /* Clean interactive action tag */
 .expand-indicator {
     font-size: 0.8rem;
-    color: #4a90e2;
-    border: 1px solid rgba(74, 144, 226, 0.3);
+    color: var(--accent-blue);
+    border: 1px solid var(--accent-blue);
     padding: 6px 12px;
     border-radius: 4px;
-    transition: all 0.2s ease;
-    font-family: 'Segoe UI', sans-serif;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 .recipe-accordion:hover .expand-indicator {
-    color: #ffffff;
-    border-color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--accent-blue);
+    color: #000;
+    box-shadow: 0 0 15px var(--accent-glow);
 }
 
-/* Text swapping mechanics using content rules when expanded */
 .recipe-accordion[open] .expand-indicator::before {
     content: "Close Protocol";
-    color: #a0aec0;
 }
 
 .recipe-accordion:not([open]) .expand-indicator::before {
     content: "Examine Protocol";
 }
 
-/* Hidden container padding revealed upon interaction */
+/* Hidden container padding */
 .accordion-content {
     padding: 0 25px 25px 25px;
 }
@@ -106,16 +108,17 @@ body {
     white-space: pre-wrap;
     line-height: 1.8;
     font-size: 0.95rem;
-    color: #b0c4de;
+    color: var(--text-main);
     background: rgba(0, 0, 0, 0.4);
     padding: 25px;
     border-radius: 4px;
-    border-left: 2px solid #4a90e2;
+    border-left: 2px solid var(--accent-blue);
+    font-family: 'Montserrat', sans-serif;
 }
 
 .empty-state {
     text-align: center;
-    color: #666;
+    color: var(--text-muted);
     font-style: italic;
     padding: 40px;
 }

@@ -1,13 +1,34 @@
 /* =========================================
    THE LABORATORY PANTRY (public/css/pantry.css)
+   DEEP NAVY & GOLD - SECRET PASSAGE THEME
    ========================================= */
 
 /* --- RESET & BASE --- */
 body {
     margin: 0;
-    background-color: #050505; /* Deep lab black */
-    color: #eee;
-    font-family: 'Fira Code', 'Courier New', monospace; /* Default to mono for that tech feel */
+    background: linear-gradient(to bottom, #0B132B 0%, #02040A 100%) !important;
+    background-attachment: fixed !important;
+    color: #e2e8f0;
+    font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+/* --- THE SECRET PASSAGE ANIMATION --- */
+@keyframes secretPassageReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+        clip-path: inset(0 50% 0 50%);
+        filter: brightness(0);
+    }
+    40% {
+        opacity: 1;
+        filter: brightness(0.4);
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        clip-path: inset(0 0 0 0);
+        filter: brightness(1);
+    }
 }
 
 .pantry-wrapper {
@@ -16,20 +37,22 @@ body {
     padding: 2rem 5% 8rem 5%;
     box-sizing: border-box;
     min-height: 100vh;
+    animation: secretPassageReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 
 /* --- TYPOGRAPHY --- */
+/* --- TYPOGRAPHY --- */
 .lab-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-weight: 700;
+    font-size: 2.2rem; /* Scaled down so it doesn't overpower the room */
+    font-weight: 400;  /* Removed the heavy bolding to match the Dashboard */
     margin-bottom: 0.5rem;
-    color: #fff;
-    letter-spacing: -1px;
+    color: #d4af37;    /* Changed from stark white to the Speakeasy Gold */
+    letter-spacing: 1px;
 }
 
 .lab-subtitle {
-    color: #888;
+    color: #d4af37;
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 1.1rem;
@@ -37,25 +60,10 @@ body {
     margin-bottom: 2rem;
 }
 
-.back-link {
-    display: inline-block;
-    margin-bottom: 1.5rem;
-    color: #d4af37;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-    letter-spacing: 1px;
-}
-
-.back-link:hover {
-    color: #fff;
-    transform: translateX(-5px);
-}
-
-/* --- CONTROL PANEL (THE CONSOLE) --- */
+/* --- CONTROL PANEL (THE STICKY CONSOLE) --- */
 .control-panel {
-    background: rgba(15, 15, 15, 0.8) !important; 
-    backdrop-filter: blur(5px);
+    background: rgba(10, 18, 40, 0.8) !important;
+    backdrop-filter: blur(15px);
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-left: 4px solid #d4af37;
     padding: 1.5rem 2.5rem;
@@ -65,7 +73,12 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+    /* Sticky magic */
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
 }
 
 .control-group {
@@ -75,20 +88,20 @@ body {
 }
 
 .control-group label {
-    color: #ccc;
+    color: #e2e8f0;
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
 }
 
 .control-panel select {
-    background-color: #000 !important; 
+    background-color: #040814 !important;
     color: #d4af37 !important;
     border: 1px solid rgba(212, 175, 55, 0.4);
     padding: 12px 20px;
     border-radius: 4px;
     font-family: inherit;
     font-size: 1rem;
-    appearance: none; 
+    appearance: none;
     cursor: pointer;
     outline: none;
     transition: all 0.3s;
@@ -100,7 +113,7 @@ body {
 
 /* Premium Gold Button */
 .protocol-btn {
-    background: transparent; 
+    background: transparent;
     color: #d4af37;
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
@@ -122,7 +135,7 @@ body {
 
 /* --- THE LABORATORY REPORT (AI RESULT) --- */
 .ai-result-panel {
-    background: rgba(20, 20, 20, 0.95);
+    background: rgba(8, 12, 25, 0.85);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(212, 175, 55, 0.3);
     border-top: 5px solid #d4af37;
@@ -150,7 +163,7 @@ body {
 
 .report-id {
     font-family: 'Fira Code', monospace;
-    color: #444;
+    color: #64748b;
     font-size: 0.8rem;
 }
 
@@ -162,12 +175,11 @@ body {
 }
 
 .protocol-content {
-    color: #ddd;
+    color: #cbd5e1;
     line-height: 1.8;
     font-size: 1.05rem;
 }
 
-/* Style for the 'Stealth Learning' rationale */
 .protocol-content em, .protocol-content i {
     color: #d4af37;
     font-family: 'Playfair Display', serif;
@@ -176,33 +188,61 @@ body {
     margin: 1rem 0;
 }
 
-/* Style for missing items mentioned by AI */
-.critical-acquisition {
-    color: #ffcc00;
-    background: rgba(255, 204, 0, 0.1);
-    padding: 2px 8px;
+/* --- REAGENT VAULT (COLLAPSIBLE DRAWERS) --- */
+.vault-drawer {
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.01);
     border-radius: 4px;
-    font-weight: bold;
-    border: 1px solid rgba(255, 204, 0, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
-/* --- REAGENT VAULT --- */
-.category-title {
-    color: #d4af37; 
-    font-family: 'Playfair Display', serif; 
-    font-size: 1.5rem;
+.vault-drawer summary.category-title {
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
     letter-spacing: 1px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    padding-bottom: 8px;
-    margin-top: 3.5rem;
-    margin-bottom: 1.5rem;
     text-transform: uppercase;
+    padding: 15px 20px;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+    list-style: none; /* Removes default arrow */
+}
+
+/* Removes default arrow in Safari */
+.vault-drawer summary.category-title::-webkit-details-marker {
+    display: none;
+}
+
+.vault-drawer summary.category-title:hover {
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.vault-drawer[open] summary.category-title {
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    margin-bottom: 15px;
+}
+
+.drawer-icon {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+    color: #64748b;
+}
+
+.vault-drawer[open] .drawer-icon {
+    transform: rotate(180deg);
+    color: #d4af37;
 }
 
 .reagent-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 15px;
+    padding: 0 20px 20px 20px;
 }
 
 .pantry-item {
@@ -210,9 +250,9 @@ body {
     align-items: center;
     background: rgba(255, 255, 255, 0.03);
     padding: 15px;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.05);
     transition: all 0.2s ease;
 }
 
@@ -232,17 +272,36 @@ body {
 .reagent-name {
     font-family: 'Fira Code', monospace;
     font-size: 0.95rem;
-    color: #ccc;
+    color: #94a3b8;
     transition: color 0.2s;
 }
 
 .pantry-item:hover .reagent-name {
-    color: #fff;
+    color: #ffffff;
 }
 
-.empty-msg {
-    color: #555;
-    font-style: italic;
-    text-align: center;
-    margin-top: 4rem;
+/* --- VAULT SEARCH BAR --- */
+.vault-search {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(10, 18, 40, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.vault-search::placeholder {
+    color: #64748b;
+}
+
+.vault-search:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    background: rgba(10, 18, 40, 0.9);
 }

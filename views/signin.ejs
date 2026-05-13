@@ -3,40 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speakeasy | Laboratory Login</title>
-    <!--suppress HtmlUnknownTarget-->
+    <title>Speakeasy | Establish Credentials</title>
+
     <link rel="stylesheet" href="/css/terminal.css">
-    <!--suppress HtmlUnknownTarget-->
+    <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/auth.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
 </head>
-<body class="auth-body">
+<body>
 
-<div class="auth-panel">
-    <div class="auth-header">
-        <h3 class="auth-title">SECURE ACCESS</h3>
-        <span class="auth-id">AUTH: REQUIRED</span>
+<%- include('partials/header') %>
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-icon">🍸</div>
+        <h1>The Speakeasy</h1>
+        <p>Establish credentials to access the laboratory.</p>
+
+        <form action="/signin" method="POST" class="auth-form">
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="auth-input" placeholder="alchemist@example.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Passphrase</label>
+                <input type="password" id="password" name="password" class="auth-input" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="auth-btn">Gain Entry</button>
+        </form>
+
+        <div class="auth-links">
+            Don't have an invitation? <a href="/signup">Request Access</a>
+        </div>
     </div>
-
-    <p class="auth-subtitle">Provide your credentials to engage the molecular synthesis engine.</p>
-
-    <form action="/signin" method="POST">
-        <div class="auth-control-group">
-            <label for="emailInput" class="auth-label">Laboratory Email</label>
-            <input id="emailInput" type="email" name="email" required class="auth-input">
-        </div>
-
-        <div class="auth-control-group">
-            <label for="passwordInput" class="auth-label">Access Code</label>
-            <input id="passwordInput" type="password" name="password" required class="auth-input">
-        </div>
-
-        <button type="submit" class="auth-btn">Unlock Laboratory</button>
-    </form>
-
-    <p class="auth-footer-text">
-        New to the Speakeasy? <a href="/signup" class="auth-link">Apply for Access</a>
-    </p>
 </div>
 
 </body>

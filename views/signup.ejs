@@ -3,45 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speakeasy | Lab Registration</title>
-    <!--suppress HtmlUnknownTarget-->
+    <title>Speakeasy | Request Access</title>
+
     <link rel="stylesheet" href="/css/terminal.css">
-    <!--suppress HtmlUnknownTarget-->
+    <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/auth.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
 </head>
-<body class="auth-body">
+<body>
 
-<div class="auth-panel">
-    <div class="auth-header">
-        <h3 class="auth-title">NEW RECRUIT</h3>
-        <span class="auth-id">SEC-ORD: 001</span>
+<%- include('partials/header') %>
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-icon">🗝️</div>
+        <h1>Request Access</h1>
+        <p>Register your credentials to enter the speakeasy.</p>
+
+        <form action="/signup" method="POST" class="auth-form">
+
+            <div class="form-group">
+                <label for="name">Alias / Name</label>
+                <input type="text" id="name" name="name" class="auth-input" placeholder="The Alchemist" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Secure Email</label>
+                <input type="email" id="email" name="email" class="auth-input" placeholder="alchemist@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Passphrase</label>
+                <input type="password" id="password" name="password" class="auth-input" placeholder="••••••••" required minlength="6">
+            </div>
+
+            <button type="submit" class="auth-btn">Submit Credentials</button>
+        </form>
+
+        <div class="auth-links">
+            Already hold a membership? <a href="/signin">Gain Entry</a>
+        </div>
     </div>
-
-    <p class="auth-subtitle">Apply for laboratory credentials to access the Alchemist's Database.</p>
-
-    <form action="/signup" method="POST">
-        <div class="auth-control-group">
-            <label for="usernameInput" class="auth-label">Username</label>
-            <input id="usernameInput" type="text" name="username" required class="auth-input">
-        </div>
-
-        <div class="auth-control-group">
-            <label for="emailInput" class="auth-label">Email Address</label>
-            <input id="emailInput" type="email" name="email" required class="auth-input">
-        </div>
-
-        <div class="auth-control-group">
-            <label for="passwordInput" class="auth-label">Access Code</label>
-            <input id="passwordInput" type="password" name="password" required class="auth-input">
-        </div>
-
-        <button type="submit" class="auth-btn">Authorize Account</button>
-    </form>
-
-    <p class="auth-footer-text">
-        Already credentialed? <a href="/signin" class="auth-link">Unlock Vault</a>
-    </p>
 </div>
 
 </body>

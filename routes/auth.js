@@ -86,7 +86,7 @@ router.post('/signin', async (req, res) => {
             // SUCCESS: Create the session
             req.session.userId = user._id;
             console.log("✅ [DEBUG] Vault Unlocked!");
-            res.redirect('/modules/pantry');
+            res.redirect('/modules/dashboard');
         } else {
             // FAILURE: Wrong credentials
             console.log("❌ [DEBUG] Invalid Credentials");
