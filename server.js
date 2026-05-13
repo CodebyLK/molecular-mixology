@@ -51,6 +51,10 @@ app.get('/dashboard', protect, (req, res) => {
     res.render('dashboard');
 });
 
+app.get('/modules/guide', protect, (req, res) => {
+    res.render('guide');
+});
+
 app.use('/modules/pantry', protect, pantryRouter);
 app.use('/api', protect, apiRouter);
 

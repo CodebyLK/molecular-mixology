@@ -17,7 +17,7 @@ The application is built following rigorous **Separation of Concerns (SoC)**, mo
 * **Backend Framework:** Express.js (MVC Pattern Architecture)
 * **Database Management:** MongoDB via Mongoose ODM
 * **Template Engine:** Embedded JavaScript (EJS)
-* **Artificial Intelligence Engine:** Google GenAI SDK (`gemini-2.5-flash` 2026 Stable Release)
+* **Artificial Intelligence Engine:** Google GenAI SDK (`gemini-2.5-flash` Stable Release)
 * **Style Framework:** Vanilla CSS3 Custom Design System (*Deep Navy, Speakeasy Gold, and Ice Blue Glass*)
 
 ---
@@ -27,7 +27,7 @@ The application is built following rigorous **Separation of Concerns (SoC)**, mo
 ### 1. The Laboratory & Vault Engine (`/pantry`)
 
 * **Collapsible Vault Drawers:** Condenses a massive list of reagents into clean, native, click-to-open accordion compartments categorized by chemical utility (Acids, Amari, Sugars, Botanicals) to eradicate scrolling fatigue.
-* **Live Reagent Filtering:** A high-performance Javascript text-matching filter running asynchronously. Typing instantly maps, isolates, and opens relevant category drawers while hiding zero-match categories in real time.
+* **Live Reagent Filtering:** A high-performance JavaScript text-matching filter running asynchronously. Typing instantly maps, isolates, and opens relevant category drawers while hiding zero-match categories in real time.
 * **Sticky Command Deck:** A floating navigation control plane designed via CSS boundary-stickiness that stays anchored to the viewport as the alchemist scrolls deeply into the vault.
 
 ### 2. The Alchemical Discovery Engine (`/api/generate-formulation`)
@@ -40,9 +40,13 @@ The application is built following rigorous **Separation of Concerns (SoC)**, mo
 
 * **Dossier Print Isolation Engine:** Leverages localized JavaScript tracking triggers coupled with targeted `@media print` CSS overrides. Clicking "Export Dossier" locks onto a single historical record, flattens the UI layout into a high-contrast monochrome layout, and bridges directly to native browser print hardware or localized PDF export engines.
 
-### 4. Credential Gateway (`/signin`, `/signup`)
+### 4. The Alchemist's Field Guide (`/modules/guide`)
 
-* A customized frosted-glass security gate matching the root layout palette, securing full user session initialization.
+* **In-App Technical Specifications:** A dedicated, fully authenticated domain manual integrated directly into the core layout template ecosystem. It translates the application's abstract code structures into foundational physical chemistry documentation, walking the user through the scientific rules governing relative specific gravity (density scales), hydrogel cross-linking (spherification thresholds), and pH manipulation (organic acid metrics).
+
+### 5. Credential Gateway (`/signin`, `/signup`)
+
+* A customized frosted-glass security gate matching the root layout palette, securing full user session initialization and rendering backend validation exceptions gracefully within the UI viewport rather than throwing flat-text browser drops.
 
 ---
 
@@ -60,7 +64,7 @@ molecular-mixology/
 │   ├── css/
 │   │   ├── auth.css             # Frosted glass gateway layout styles
 │   │   ├── journal.css          # Archive sheets & printer override logic
-│   │   ├── layout.css           # Neutral navigation bridge frames
+│   │   ├── layout.css           # Neutral navigation bridge frames & guide rules
 │   │   ├── pantry.css           # Deep navy/gold animations & sticky console
 │   │   ├── ph-shift.css         # Acid-adjustment layout customizations
 │   │   ├── spherification.css   # Encapsulation module visuals
@@ -90,6 +94,7 @@ molecular-mixology/
 │   ├── dashboard.ejs            # Deep midnight hub viewport
 │   ├── density.ejs              # Visual stratification workspace
 │   ├── error.ejs                # Themed emergency lockdown handler
+│   ├── guide.ejs                # Standalone domain manual & system specs view
 │   ├── journal.ejs              # Historical recipe archive grimoire
 │   ├── pantry.ejs               # Main reagent inventory console
 │   ├── ph-shift.ejs             # pH workspace interface deck
@@ -131,7 +136,7 @@ Create a `.env` file in the root directory and securely map your ports, database
 
 ```env
 PORT=3000
-MONGODB_URI=mongodb://127.0.0.1:27017/molecular_mixology
+MONGO_URI=mongodb://127.0.0.1:27017/molecular_mixology
 SESSION_SECRET=your_secret_speakeasy_passphrase
 GEMINI_API_KEY=your_google_gemini_api_key
 
