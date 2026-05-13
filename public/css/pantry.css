@@ -41,13 +41,12 @@ body {
 }
 
 /* --- TYPOGRAPHY --- */
-/* --- TYPOGRAPHY --- */
 .lab-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.2rem; /* Scaled down so it doesn't overpower the room */
-    font-weight: 400;  /* Removed the heavy bolding to match the Dashboard */
+    font-size: 2.2rem;
+    font-weight: 400;
     margin-bottom: 0.5rem;
-    color: #d4af37;    /* Changed from stark white to the Speakeasy Gold */
+    color: #d4af37;
     letter-spacing: 1px;
 }
 
@@ -210,10 +209,9 @@ body {
     align-items: center;
     border-bottom: 1px solid transparent;
     transition: all 0.3s;
-    list-style: none; /* Removes default arrow */
+    list-style: none;
 }
 
-/* Removes default arrow in Safari */
 .vault-drawer summary.category-title::-webkit-details-marker {
     display: none;
 }
@@ -304,4 +302,100 @@ body {
     border-color: #d4af37;
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
     background: rgba(10, 18, 40, 0.9);
+}
+
+/* =========================================
+   PRINT ENGINE STYLESHEET (Dossier Export)
+   ========================================= */
+@media print {
+    .lab-nav,
+    .pantry-header,
+    .control-panel,
+    .search-container,
+    .vault-container,
+    #printDossierBtn,
+    .back-link,
+    footer {
+        display: none !important;
+    }
+
+    html, body {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        background-image: none !important;
+        color: #111111 !important;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 12pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    .pantry-wrapper {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        min-height: auto !important;
+        animation: none !important;
+        clip-path: none !important;
+        filter: none !important;
+    }
+
+    .ai-result-panel {
+        display: block !important;
+        background: #ffffff !important;
+        border: 2px solid #111111 !important;
+        border-top: 6px solid #111111 !important;
+        padding: 2.5rem !important;
+        margin: 20mm auto !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        border-radius: 0px !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        page-break-inside: avoid;
+    }
+
+    .report-header h3 {
+        color: #111111 !important;
+        font-family: 'Playfair Display', serif;
+        font-size: 22pt !important;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0 !important;
+    }
+
+    .report-id {
+        color: #555555 !important;
+        font-family: 'Fira Code', monospace;
+        font-size: 10pt !important;
+    }
+
+    .lab-divider {
+        border: 0 !important;
+        height: 1px !important;
+        background: #111111 !important;
+        margin: 1.5rem 0 !important;
+    }
+
+    .protocol-content {
+        color: #111111 !important;
+        line-height: 1.6 !important;
+        font-size: 12pt !important;
+        white-space: pre-wrap !important;
+    }
+
+    .protocol-content em, .protocol-content i {
+        color: #222222 !important;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-size: 13pt !important;
+    }
+
+    .critical-acquisition {
+        color: #000000 !important;
+        background: #eeeeee !important;
+        border: 1px solid #111111 !important;
+        padding: 2px 6px !important;
+    }
 }

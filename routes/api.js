@@ -13,14 +13,13 @@ router.post('/generate-formulation', async (req, res) => {
         const { ingredients, module_used } = req.body;
 
         if (!ingredients || ingredients.length === 0) {
-            return res.status(400).json({ success: false, error: "No reagents selected." });
+            return res.status(400).json({ success: false, error: "The Alchemist requires reagents to proceed." });
         }
 
         const techniqueInstruction = module_used === "auto"
             ? "Analyze the reagents and select the ONE technique that best elevates this specific flavor profile."
             : `Focus specifically on the "${module_used}" technique.`;
 
-        // Refined prompt using your "Speakeasy Scientist" rules
         const prompt = `
             You are the World Class Alchemist of a prestigious molecular speakeasy. 
             Available reagents: ${ingredients.join(', ')}.
@@ -47,18 +46,14 @@ router.post('/generate-formulation', async (req, res) => {
             - Preparation Protocol: [Step-by-step mixology instructions.]
         `;
 
-        // --- CALLING THE 2026 STABLE MODEL ---
         const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash", // Updated to the 2026 stable version
+            model: "gemini-2.5-flash",
             contents: [{ role: 'user', parts: [{ text: prompt }] }]
         });
 
         const aiOutput = response.text;
 
-        // 🧠 DYNAMIC NAME EXTRACTOR
-        // Scans the text for "Protocol Name:", bypasses any markdown formatting symbols,
-        // and safely isolates the exact title name.
-        let dynamicTitle = "Lab Synthesis"; // Fallback placeholder
+        let dynamicTitle = "Lab Synthesis";
         const nameMatch = aiOutput.match(/Protocol Name:\s*\**([^*%\n\r]+)\**/i);
         if (nameMatch && nameMatch[1]) {
             dynamicTitle = nameMatch[1].trim();
@@ -67,7 +62,7 @@ router.post('/generate-formulation', async (req, res) => {
         const newFormulation = new Formulation({
             user_id: req.session.userId,
             module_used: module_used,
-            target_drink: dynamicTitle, // <-- Saved dynamically from the AI output
+            target_drink: dynamicTitle,
             ai_protocol: aiOutput
         });
 
@@ -77,7 +72,21 @@ router.post('/generate-formulation', async (req, res) => {
     } catch (error) {
         console.error("--- LAB CRASH REPORT ---");
         console.error(error);
-        res.status(500).json({ success: false, error: "The Alchemist encountered a model instability. Check the logs." });
+
+        let themedError = "The Alchemist encountered a model instability.";
+
+        // --- SPECIFIC ERROR MAPPING ---
+        if (error.message && error.message.includes('API key')) {
+            themedError = "Laboratory credentials invalid. Access to the Alchemist's mind is denied.";
+        } else if (error.name === 'MongooseError' || error.name === 'MongoNetworkError') {
+            themedError = "The Laboratory Journal is currently offline. Protocol cannot be archived.";
+        } else if (error.message && error.message.includes('quota')) {
+            themedError = "The Alchemist has exceeded their daily cognitive capacity. Try again after the next shift.";
+        } else if (error.message && error.message.includes('safety')) {
+            themedError = "The requested synthesis was flagged as volatile and dangerous. Protocol aborted.";
+        }
+
+        res.status(500).json({ success: false, error: themedError });
     }
 });
 

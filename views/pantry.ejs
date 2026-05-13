@@ -38,7 +38,12 @@
     <div id="aiResult" class="ai-result-panel" style="display: none;">
         <div class="report-header">
             <h3>🔬 Formulated Protocol</h3>
-            <span class="report-id">Ref: <%= new Date().getTime().toString().slice(-6) %></span>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button id="printDossierBtn" class="protocol-btn" style="padding: 6px 15px; font-size: 0.75rem; font-family: 'Fira Code', monospace; letter-spacing: 1px;">
+                    💾 Export Dossier
+                </button>
+                <span class="report-id">Ref: <%= new Date().getTime().toString().slice(-6) %></span>
+            </div>
         </div>
         <hr class="lab-divider">
         <div id="protocolOutput" class="protocol-content"></div>

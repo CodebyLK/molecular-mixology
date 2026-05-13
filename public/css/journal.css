@@ -122,3 +122,207 @@
     font-style: italic;
     padding: 40px;
 }
+
+/* =======================================================
+   ARCHIVE MEDIA PRINT SYSTEM (Single-Recipe Isolation)
+   ======================================================= */
+@media print {
+    /* 1. Vaporize global UI layout frames, navigation elements, icons, and non-active records */
+    body *,
+    .lab-nav,
+    header,
+    .journal-title,
+    .export-bar,
+    .expand-indicator,
+    summary::-webkit-details-marker {
+        display: none !important;
+    }
+
+    /* 2. Re-surface only the targeted recipe node and its internal children */
+    .printing-now,
+    .printing-now *,
+    .printing-now .accordion-content,
+    .printing-now .protocol-display {
+        display: block !important;
+    }
+
+    /* 3. Re-configure rendering window into a monochrome parchment textbook style */
+    html, body {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        background-image: none !important;
+        color: #111111 !important;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 12pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    .printing-now {
+        border: 2px solid #111111 !important;
+        border-top: 6px solid #111111 !important; /* Prominent top accent line */
+        background: #ffffff !important;
+        padding: 25mm 20mm !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        box-shadow: none !important;
+    }
+
+    /* Reformat the header details to layout cleanly without dark UI glass backgrounds */
+    .printing-now summary.recipe-summary {
+        display: block !important;
+        border: none !important;
+        padding: 0 0 12px 0 !important;
+        margin-bottom: 25px !important;
+        border-bottom: 1px dashed #111111 !important;
+    }
+
+    .printing-now .recipe-meta {
+        display: block !important;
+        font-family: 'Fira Code', monospace;
+        font-size: 10pt !important;
+        color: #444444 !important;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+
+    .printing-now summary.recipe-summary h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 26pt !important;
+        font-weight: bold !important;
+        color: #000000 !important;
+        margin: 0 !important;
+        letter-spacing: 0;
+    }
+
+    /* Display the pristine AI mixology text block formatting */
+    .printing-now .protocol-display {
+        color: #111111 !important;
+        line-height: 1.6 !important;
+        font-size: 11pt !important;
+        white-space: pre-wrap !important;
+    }
+}
+
+/* =======================================================
+   JOURNAL EXPORT UTILITIES (Screen Mode)
+   ======================================================= */
+.export-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.export-dossier-btn {
+    background: transparent;
+    color: var(--accent-blue, #8AB4F8);
+    border: 1px solid var(--accent-blue, #8AB4F8);
+    padding: 8px 18px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Premium Hover Glow to match the "Close Protocol" style */
+.export-dossier-btn:hover {
+    background: var(--accent-blue, #8AB4F8);
+    color: #070B14; /* Deep midnight contrast */
+    box-shadow: 0 0 15px var(--accent-glow, rgba(138, 180, 248, 0.3));
+    transform: translateY(-1px);
+}
+
+.export-dossier-btn:active {
+    transform: translateY(1px);
+}
+
+
+/* =======================================================
+   ARCHIVE MEDIA PRINT SYSTEM (Single-Recipe Isolation)
+   ======================================================= */
+@media print {
+    /* 1. Hide top-level global layout bars, menus, and layout text chrome */
+    .lab-nav,
+    header,
+    .journal-title,
+    .export-bar,
+    .expand-indicator,
+    summary::-webkit-details-marker,
+    footer {
+        display: none !important;
+    }
+
+    /* 2. Hide all other recipes to avoid blank spaces or page bleed */
+    .recipe-accordion {
+        display: none !important;
+    }
+
+    /* 3. Re-surface ONLY the container nodes and our actively designated recipe */
+    html, body, .journal-container, main {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        background-image: none !important;
+        color: #111111 !important;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 12pt;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* 4. Format the target isolated item into an ink-friendly layout */
+    .recipe-accordion.printing-now {
+        display: block !important;
+        border: 2px solid #111111 !important;
+        border-top: 6px solid #111111 !important; /* Elegant document header accent line */
+        background: #ffffff !important;
+        padding: 20mm !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        box-shadow: none !important;
+    }
+
+    .printing-now .accordion-content,
+    .printing-now .protocol-display {
+        display: block !important;
+        color: #111111 !important;
+    }
+
+    /* Clean typography structure for the physical paper / PDF print */
+    .printing-now summary.recipe-summary {
+        display: block !important;
+        border: none !important;
+        padding-bottom: 12px !important;
+        margin-bottom: 25px !important;
+        border-bottom: 1px dashed #111111 !important;
+    }
+
+    .printing-now .recipe-meta {
+        display: block !important;
+        font-family: 'Fira Code', monospace;
+        font-size: 10pt !important;
+        color: #444444 !important;
+        text-transform: uppercase;
+    }
+
+    .printing-now summary.recipe-summary h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 24pt !important;
+        font-weight: bold !important;
+        color: #000000 !important;
+        margin: 6px 0 0 0 !important;
+        letter-spacing: 0px;
+    }
+
+    .printing-now .protocol-display {
+        line-height: 1.6 !important;
+        font-size: 11pt !important;
+        white-space: pre-wrap !important;
+    }
+}

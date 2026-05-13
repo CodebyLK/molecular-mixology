@@ -3,74 +3,80 @@
 document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generateBtn');
     const aiResultDiv = document.getElementById('aiResult');
-    const protocolOutput = document.getElementById('protocolOutput'); // Updated ID
+    const protocolOutput = document.getElementById('protocolOutput');
+    const techniqueSelect = document.getElementById('techniqueSelect');
+    const printDossierBtn = document.getElementById('printDossierBtn');
 
-    generateBtn.addEventListener('click', async () => {
-        // 1. Gather all checked reagents from the vault
-        const checkedBoxes = document.querySelectorAll('.reagent-checkbox:checked');
-        const selectedIngredients = Array.from(checkedBoxes).map(box => box.value);
-        
-        // 2. Get the target technique (will be "auto" for Discovery Mode)
-        const selectedTechnique = document.getElementById('techniqueSelect').value;
+    // --- 1. ALCHEMICAL FORMULATION ENGINE ---
+    if (generateBtn) {
+        generateBtn.addEventListener('click', async () => {
+            const checkedBoxes = document.querySelectorAll('.reagent-checkbox:checked');
+            const selectedIngredients = Array.from(checkedBoxes).map(box => box.value);
+            const selectedTechnique = techniqueSelect.value;
 
-        // 3. Validation: The Alchemist needs at least a few items to work with
-        if (selectedIngredients.length === 0) {
-            alert("The laboratory requires reagents to proceed. Please select items from the vault.");
-            return;
-        }
+            // Reset the panel state for a new synthesis attempt
+            aiResultDiv.style.borderTopColor = 'var(--accent-blue, #d4af37)';
 
-        // Update UI: Show the "Formulating" state
-        generateBtn.innerText = "SYNTHESIZING...";
-        generateBtn.disabled = true;
-        
-        // Hide previous results while "thinking"
-        aiResultDiv.style.opacity = '0.5'; 
+            if (selectedIngredients.length === 0) {
+                aiResultDiv.style.display = 'block';
+                aiResultDiv.style.opacity = '1';
+                aiResultDiv.style.borderTopColor = '#ffcc00'; // Warning Yellow
+                protocolOutput.innerHTML = `<span style="color: #ffcc00;">⚠️ VAULT EMPTY:</span> The laboratory requires reagents to proceed. Please select items from the vault.`;
+                aiResultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
 
-        try {
-            // 4. Send the data to the Discovery Engine
-            const response = await fetch('/api/generate-formulation', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    ingredients: selectedIngredients,
-                    module_used: selectedTechnique
-                })
-            });
+            generateBtn.innerText = "SYNTHESIZING...";
+            generateBtn.disabled = true;
+            aiResultDiv.style.opacity = '0.5';
 
-            const data = await response.json();
+            try {
+                const response = await fetch('/api/generate-formulation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ingredients: selectedIngredients,
+                        module_used: selectedTechnique
+                    })
+                });
 
-            if (data.success) {
-                // 5. Inject the AI output into the Laboratory Report
-                // We use innerText to preserve the line breaks from the AI
-                protocolOutput.innerText = data.protocol;
-                
-                // Show the panel and reset opacity
+                const data = await response.json();
+
                 aiResultDiv.style.display = 'block';
                 aiResultDiv.style.opacity = '1';
 
-                // 6. Smooth scroll to the result so the user sees the report immediately
+                if (data.success) {
+                    protocolOutput.innerText = data.protocol;
+                } else {
+                    aiResultDiv.style.borderTopColor = '#ef4444'; // Error Red
+                    protocolOutput.innerHTML = `<span style="color: #ef4444;">⚠️ PROTOCOL ABORTED:</span> ${data.error}`;
+                }
+
                 aiResultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            } else {
-                alert("Laboratory Error: " + data.error);
+            } catch (error) {
+                console.error("Fetch error:", error);
+                aiResultDiv.style.display = 'block';
+                aiResultDiv.style.opacity = '1';
+                aiResultDiv.style.borderTopColor = '#ef4444';
+                protocolOutput.innerHTML = `<span style="color: #ef4444;">🚨 CRITICAL FAILURE:</span> The Laboratory uplink has been severed. Security lockdown in effect.`;
+                aiResultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } finally {
+                generateBtn.innerText = "Initiate Protocol";
+                generateBtn.disabled = false;
             }
-        } catch (error) {
-            console.error("Fetch error:", error);
-            alert("CRITICAL ERROR: Failed to connect to the laboratory backend.");
-        } finally {
-            // Reset the button to its original state
-            generateBtn.innerText = "Initiate Protocol";
-            generateBtn.disabled = false;
-        }
-    });
+        });
+    }
+
+    // --- 2. DOSSIER EXPORT ENGINE (PRINT/PDF) ---
+    if (printDossierBtn) {
+        printDossierBtn.addEventListener('click', () => {
+            window.print();
+        });
+    }
 });
 
-// ==========================================
-// VAULT UI INTERACTIONS (Search & Filter)
-// ==========================================
-
+// --- 3. VAULT UI INTERACTIONS (LIVE SEARCH & FILTER) ---
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('reagentSearch');
     const drawers = document.querySelectorAll('.vault-drawer');
@@ -86,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 items.forEach(item => {
                     const name = item.querySelector('.reagent-name').innerText.toLowerCase();
 
-                    // Toggle visibility based on match
                     if (name.includes(searchTerm)) {
                         item.style.display = 'flex';
                         hasVisibleItems = true;
@@ -95,12 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // Auto-expand drawer if searching, otherwise leave it alone
                 if (searchTerm !== '') {
                     drawer.open = true;
                 }
 
-                // Hide the entire drawer if it contains no matching reagents
                 drawer.style.display = hasVisibleItems ? 'block' : 'none';
             });
         });

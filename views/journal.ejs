@@ -6,11 +6,8 @@
     <title>Speakeasy | Archives</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="/css/terminal.css">
-
     <link rel="stylesheet" href="/css/layout.css">
-
     <link rel="stylesheet" href="/css/journal.css">
 </head>
 <body>
@@ -28,9 +25,9 @@
 
                     <summary class="recipe-summary">
                         <div class="summary-left">
-                                <span class="recipe-meta">
-                                    <%= note.module_used %> &bull; <%= note.date_created.toLocaleDateString() %>
-                                </span>
+                            <span class="recipe-meta">
+                                <%= note.module_used %> &bull; <%= note.date_created.toLocaleDateString() %>
+                            </span>
                             <h2><%= note.target_drink %></h2>
                         </div>
                         <div class="summary-right">
@@ -39,6 +36,12 @@
                     </summary>
 
                     <div class="accordion-content">
+                        <div class="export-bar">
+                            <button class="export-dossier-btn">
+                                💾 Export Dossier
+                            </button>
+                        </div>
+
                         <div class="protocol-display"><%= note.ai_protocol %></div>
                     </div>
 
@@ -53,5 +56,6 @@
     </main>
 </div>
 
+<script src="/js/journal-engine.js"></script>
 </body>
 </html>
