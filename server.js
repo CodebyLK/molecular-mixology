@@ -38,6 +38,10 @@ const dashboardRouter = require('./routes/dashboard');
 
 // --- ROUTE DEFINITION ---
 
+app.get('/', (req, res) => {
+    res.redirect('/signin');
+});
+
 // Public Routes (No 'protect' needed)
 app.use('/', authRouter);
 
@@ -66,6 +70,7 @@ mongoose.connect(dbURL)
     .catch((error) => console.error("❌ Error: Could not connect to Atlas.", error));
 
 // Server Activation
-app.listen(3000, () => {
-    console.log("🚀 Terminal online at http://localhost:3000");
+const PORT = process.env.PORT || 3000; // Uses Render's port in production, 3000 locally
+app.listen(PORT, () => {
+    console.log(`🚀 Terminal online at port ${PORT}`);
 });
