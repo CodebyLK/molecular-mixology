@@ -7,8 +7,8 @@ const mongoose = require('mongoose');
 const protect = require('./middleware/auth');
 
 // Models (Optional here if routes handle them, but good for top-level tasks)
-const Reagent = require('./models/Reagent');
-const Formulation = require('./models/Formulation');
+// const Reagent = require('./models/Reagent');
+// const Formulation = require('./models/Formulation');
 
 const app = express();
 
