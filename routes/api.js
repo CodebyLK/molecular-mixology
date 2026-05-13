@@ -21,30 +21,30 @@ router.post('/generate-formulation', async (req, res) => {
             : `Focus specifically on the "${module_used}" technique.`;
 
         const prompt = `
-            You are the World Class Alchemist of a prestigious molecular speakeasy. 
-            Available reagents: ${ingredients.join(', ')}.
+    You are the World Class Alchemist of a prestigious molecular speakeasy. 
+    Available reagents: ${ingredients.join(', ')}.
 
-            PHASE 1: SELECTIVE SYNTHESIS
-            - Select a compatible subset (3-5 items). Prioritize flavor harmony.
+    PHASE 1: SELECTIVE SYNTHESIS
+    - Select a compatible subset (3-5 items). Prioritize flavor harmony.
 
-            PHASE 2: THE MOLECULAR PROTOCOL
-            - ${techniqueInstruction}
-            - Techniques: Density & Stratification, Encapsulation, Acid-Adjustment, Botanical Alchemy.
+    PHASE 2: THE MOLECULAR PROTOCOL
+    - ${techniqueInstruction}
+    - Techniques: Density & Stratification, Encapsulation, Acid-Adjustment, Botanical Alchemy.
 
-            STRICT GUARDRAILS:
-            1. TASTE IS SUPREME: If reagents clash, provide a "Lab Rejection Note."
-            2. MEASUREMENTS: Use bartending volumes (oz, dashes, barspoons) for spirits. Use scientific units (ml, grams) ONLY for precision additives.
-            3. TERMINOLOGY: Use "chilled glassware" or "pristine tools." NEVER use "sterile" or medical jargon.
-            4. THE ACQUISITION LIMIT: Suggest max TWO "Critical Acquisitions."
+    STRICT GUARDRAILS:
+    1. TASTE IS SUPREME: If reagents clash, provide a "Lab Rejection Note."
+    2. MEASUREMENTS: Use bartending volumes (oz, dashes, barspoons) for spirits. Use scientific units (ml, grams) ONLY for precision additives.
+    3. TERMINOLOGY & ATMOSPHERE: Enforce an elite, ultra-luxurious lounge atmosphere. ABSOLUTELY FORBIDDEN words: "beaker", "pipette", "test tube", "syringe", "sterile", or medical/clinical jargon. Instead, use high-end mixology terms: "mixing glass", "mixing vessel", "precision dropper", "dasher", "chilled glassware", or "pristine tools".
+    4. THE ACQUISITION LIMIT: Suggest max TWO "Critical Acquisitions."
 
-            OUTPUT FORMAT (Elegant & Professional):
-            - Protocol Name: [Creative name]
-            - Technique: [Chosen Module]
-            - Flavor Theory: [A brief, classy explanation of why these flavors work together.]
-            - Reagents Used: [List chosen reagents with bar-measurements]
-            - Critical Acquisitions: [List 1 or 2 required items, or "None"]
-            - Preparation Protocol: [Step-by-step mixology instructions.]
-        `;
+    OUTPUT FORMAT (Elegant & Professional):
+    - Protocol Name: [Creative name]
+    - Technique: [Chosen Module]
+    - Flavor Theory: [A brief, classy explanation of why these flavors work together.]
+    - Reagents Used: [List chosen reagents with bar-measurements]
+    - Critical Acquisitions: [List 1 or 2 required items, or "None"]
+    - Preparation Protocol: [Step-by-step mixology instructions.]
+`;
 
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",

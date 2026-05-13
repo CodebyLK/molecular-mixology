@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Mixology Masterclasses</title>
     <link rel="stylesheet" href="/css/terminal.css">
     <link rel="stylesheet" href="/css/layout.css">
@@ -10,95 +11,98 @@
 
 <%- include('partials/header') %>
 
-    <div class="terminal-container">
-        <header>
-            <h1>Welcome Back, <%= username %></h1>
-            <p>The laboratory instruments are calibrated and awaiting your directives.</p>
-        </header>
+<div class="terminal-container">
+    <header class="dashboard-header">
+        <h1>Welcome Back, <%= username %></h1>
+        <p>The laboratory instruments are calibrated and awaiting your directives.</p>
+    </header>
 
-        <main>
+    <main>
+        <section class="field-guide-section">
+            <h2 class="guide-section-title">🔬 The Alchemist's Field Guide</h2>
 
-            <section class="field-guide-section">
-                <h2 class="guide-section-title">🔬 The Alchemist's Field Guide</h2>
-
-                <div class="guide-grid">
-
-                    <div class="guide-card">
-                        <h3 class="guide-card-title">📊 Stratification</h3>
-                        <p class="guide-card-text">
-                            Manipulates liquid sugar weight (Brix scale) and alcohol densities to build distinct, un-mixed floating layers inside a single glassware vessel.
-                        </p>
-                    </div>
-
-                    <div class="guide-card">
-                        <h3 class="guide-card-title">🔮 Encapsulation</h3>
-                        <p class="guide-card-text">
-                            Employs calcium alginate gel cross-linking to trap liquid payloads inside fragile spheres that burst with explosive flavor clarity upon consumption.
-                        </p>
-                    </div>
-
-                    <div class="guide-card">
-                        <h3 class="guide-card-title">🧪 Acid-Adjustment</h3>
-                        <p class="guide-card-text">
-                            Alters the chemical pH balance of standard organic juices with precise powder vectors, synthesizing the high-acidity characteristics of citrus targets.
-                        </p>
-                    </div>
-
-                    <div class="guide-card">
-                        <h3 class="guide-card-title">🌿 Botanical Alchemy</h3>
-                        <p class="guide-card-text">
-                            Accelerates solvent extraction to isolate essential oils and organic chemical compounds from root and herbal matrices into custom aromatics.
-                        </p>
-                    </div>
-
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3 class="guide-card-title">📊 Stratification</h3>
+                    <p class="guide-card-text">Manipulates liquid sugar weight (Brix scale) and alcohol densities to build distinct, un-mixed floating layers inside a single glassware vessel.</p>
                 </div>
-            </section>
 
-            <h2 style="color: var(--accent-blue); font-family: 'Playfair Display', serif; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 2rem;">The Main Stage: Theatrics</h2>
-            
-            <div class="module-grid" style="margin-bottom: 4rem;">
-                <a href="/modules/ph-shift" class="module-card">
-                    <h3>Botanical Alchemy</h3>
-                    <p>Master the interactive pH color shift using Butterfly Pea blossoms and citrus.</p>
-                </a>
-                
-                <a href="/modules/spherification" class="module-card">
-                    <h3>Encapsulation</h3>
-                    <p>Use sodium alginate to turn liquid modifiers into bursting, edible caviar.</p>
-                </a>
+                <div class="guide-card">
+                    <h3 class="guide-card-title">🔮 Encapsulation</h3>
+                    <p class="guide-card-text">Employs calcium alginate gel cross-linking to trap liquid payloads inside fragile spheres that burst with explosive flavor clarity upon consumption.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h3 class="guide-card-title">🧪 Acid-Adjustment</h3>
+                    <p class="guide-card-text">Alters the chemical pH balance of standard organic juices with precise powder vectors, synthesizing the high-acidity characteristics of citrus targets.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h3 class="guide-card-title">🌿 Botanical Alchemy</h3>
+                    <p class="guide-card-text">Accelerates solvent extraction to isolate essential oils and organic chemical compounds from root and herbal matrices into custom aromatics.</p>
+                </div>
             </div>
+        </section>
 
-            <h2 style="color: var(--accent-blue); font-family: 'Playfair Display', serif; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 2rem;">The Prep Lab: Foundations</h2>
-            
-            <div class="module-grid">
-                <a href="/modules/density" class="module-card">
-                    <h3>Density & Stratification</h3>
-                    <p>Learn the mechanics of floating spirits to create striking visual gradients.</p>
-                </a>
+        <h2 class="dashboard-section-heading">The Main Stage: Theatrics</h2>
 
-                <a href="/modules/acid" class="module-card"> <h3>Acid-Adjustment</h3>
-                    <p>Engineer citrus profiles, turning simple juices into a perfectly balanced backbone.</p>
-                </a>
+        <div class="module-grid grid-spaced">
+            <a href="/modules/ph-shift" class="module-card">
+                <h3>Botanical Alchemy</h3>
+                <p>Master the interactive pH color shift using Butterfly Pea blossoms and citrus.</p>
+            </a>
 
-                <a href="/modules/pantry" class="module-card">
-                    <h3>The Pantry Engine</h3>
-                    <p>Select your available reagents and let the AI formulate a custom molecular protocol.</p>
-                </a>
+            <a href="/modules/spherification" class="module-card">
+                <h3>Encapsulation</h3>
+                <p>Use sodium alginate to turn liquid modifiers into bursting, edible caviar.</p>
+            </a>
+        </div>
 
+        <h2 class="dashboard-section-heading">The Prep Lab: Foundations</h2>
 
-            </div>
+        <div class="module-grid grid-spaced">
+            <a href="/modules/density" class="module-card">
+                <h3>Density & Stratification</h3>
+                <p>Learn the mechanics of floating spirits to create striking visual gradients.</p>
+            </a>
 
-            <h2 style="margin-top: 4rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--glass-border); font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--accent-blue); font-weight: 400; letter-spacing: 1px;">
-                The Archives: Record & Review
-            </h2>
+            <a href="/modules/acid" class="module-card">
+                <h3>Acid-Adjustment</h3>
+                <p>Engineer citrus profiles, turning simple juices into a perfectly balanced backbone.</p>
+            </a>
 
-            <div class="module-grid">
-                <a href="/modules/journal" class="module-card">
-                    <h3>Laboratory Journal</h3>
-                    <p>Access your personal grimoire. Review successfully formulated protocols, chemical syntheses, and past alchemical discoveries.</p>
-                </a>
-            </div>
-        </main>
+            <a href="/modules/pantry" class="module-card">
+                <h3>The Pantry Engine</h3>
+                <p>Select your available reagents and let the AI formulate a custom molecular protocol.</p>
+            </a>
+        </div>
+
+        <h2 class="dashboard-section-heading archives-heading">The Archives: Record & Review</h2>
+
+        <div class="module-grid">
+            <a href="/modules/journal" class="module-card">
+                <h3>Laboratory Journal</h3>
+                <p>Access your personal grimoire. Review successfully formulated protocols, chemical syntheses, and past alchemical discoveries.</p>
+            </a>
+        </div>
+    </main>
+</div>
+
+<div id="tour-overlay" class="tour-overlay hidden">
+    <div class="tour-modal">
+        <div class="tour-header">
+            <span class="tour-step-badge" id="tour-counter">1/4</span>
+            <button id="tour-close" class="tour-close-btn">&times;</button>
+        </div>
+        <h3 id="tour-title" class="tour-title">Welcome</h3>
+        <p id="tour-text" class="tour-text">Tour text goes here.</p>
+        <div class="tour-actions">
+            <button id="tour-next" class="tour-btn">Next Sequence</button>
+        </div>
     </div>
+</div>
+
+<script src="/js/tour-engine.js"></script>
+
 </body>
 </html>

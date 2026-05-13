@@ -22,7 +22,7 @@ app.use(express.json());
 
 // Session Configuration (Must be before routes)
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'alchemy-secret-key', // Use .env for the secret!
+    secret: process.env.SESSION_SECRET, // Use .env for the secret!
     resave: false,
     saveUninitialized: false
 }));

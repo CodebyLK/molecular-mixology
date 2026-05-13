@@ -236,3 +236,97 @@
         padding: 20px;
     }
 }
+
+/* =======================================================
+   DISAPPEARING TOUR MODAL
+   ======================================================= */
+.tour-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 25, 47, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.tour-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tour-modal {
+    background: #0f172a;
+    border: 1px solid rgba(138, 180, 248, 0.3);
+    border-radius: 8px;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.tour-overlay.hidden .tour-modal {
+    transform: translateY(20px);
+}
+
+.tour-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tour-step-badge {
+    background: rgba(138, 180, 248, 0.1);
+    color: var(--accent-blue, #8AB4F8);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+}
+
+.tour-close-btn {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.tour-close-btn:hover { color: #ef4444; }
+
+.tour-title {
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+}
+
+.tour-text {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0 0 25px 0;
+    font-size: 0.95rem;
+}
+
+.tour-btn {
+    background: var(--accent-blue, #8AB4F8);
+    color: #0a192f;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: opacity 0.2s;
+}
+
+.tour-btn:hover {
+    opacity: 0.9;
+}
