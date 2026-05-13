@@ -76,7 +76,7 @@ router.post('/signin', async (req, res) => {
             // SUCCESS: Initialize persistent session tracking
             req.session.userId = user._id;
             console.log("✅ [DEBUG] Vault Unlocked! Access Granted.");
-            res.redirect('/modules/dashboard');
+            res.redirect('/dashboard');
         } else {
             // FAILURE: Mismatched credentials caught inside the template frame
             console.log("❌ [DEBUG] Authentication Refused: Bad Credentials");
@@ -96,7 +96,7 @@ router.get('/signout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             console.error("💥 [DEBUG] Failed to terminate cloud session container:", err);
-            return res.redirect('/modules/dashboard');
+            return res.redirect('/dashboard');
         }
 
         // 2. Wipe identity authorization cookies cleanly from browser cache

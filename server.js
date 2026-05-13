@@ -6,6 +6,8 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const protect = require('./middleware/auth');
 
+const User = require('./models/User');
+
 // Models (Optional here if routes handle them, but good for top-level tasks)
 // const Reagent = require('./models/Reagent');
 // const Formulation = require('./models/Formulation');
@@ -47,8 +49,20 @@ app.use('/', authRouter);
 
 // Protected Routes (The "Locked Door" logic)
 // All 'Main Pages' and the API must use the 'protect' middleware
-app.get('/dashboard', protect, (req, res) => {
-    res.render('dashboard');
+// Inside server.js - Update your dashboard route to this:
+// Inside server.js
+app.get('/dashboard', protect, async (req, res) => {
+    try {
+        // 1. Look up the active alchemist using their unique session ID
+        const user = await User.findById(req.session.userId);
+
+        // 2. Pass the username into the dashboard template
+        // Fallback to 'Alchemist' if for some reason the user isn't found
+        res.render('dashboard', { username: user ? user.username : 'Alchemist' });
+    } catch (err) {
+        console.error("💥 Dashboard User Fetch Failed:", err.message);
+        res.render('dashboard', { username: 'Alchemist' });
+    }
 });
 
 app.get('/modules/guide', protect, (req, res) => {
