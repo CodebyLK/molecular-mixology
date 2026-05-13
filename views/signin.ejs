@@ -19,18 +19,21 @@
         <h1>The Speakeasy</h1>
         <p>Establish credentials to access the laboratory.</p>
 
-        <form action="/signin" method="POST" class="auth-form">
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="error-msg">
+                <%= error %>
+            </div>
+        <% } %>
 
+        <form action="/signin" method="POST" class="auth-form">
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" class="auth-input" placeholder="alchemist@example.com" required autocomplete="email">
             </div>
-
             <div class="form-group">
                 <label for="password">Passphrase</label>
                 <input type="password" id="password" name="password" class="auth-input" placeholder="••••••••" required>
             </div>
-
             <button type="submit" class="auth-btn">Gain Entry</button>
         </form>
 

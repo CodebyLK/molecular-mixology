@@ -3,116 +3,107 @@ const router = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-console.log("🧪 TRACER BULLET: auth.js has been loaded by the server!");
+console.log("🧪 TRACER BULLET: auth.js has been successfully initialized!");
 
-// GET Signup Page
-router.get('/signup', (req, res) => res.render('signup'));
+// ==========================================
+// REGISTRATION PORTS (SIGNUP)
+// ==========================================
 
-// POST Signup Logic
+// GET: Display Signup Gateway
+router.get('/signup', (req, res) => {
+    res.render('signup', { error: null });
+});
+
+// POST: Process New Alchemist Credentials
 router.post('/signup', async (req, res) => {
-    console.log("📥 [DEBUG] Incoming Data:", req.body); // Check if data is arriving
+    console.log("📥 [DEBUG] Incoming Registration Payload:", req.body);
 
     try {
         const { username, email, password } = req.body;
 
-        // 1. Check if the destructuring worked
+        // Validation Check
         if (!username || !email || !password) {
-            console.log("❌ [DEBUG] Missing fields detected!");
-            return res.status(400).send("Missing fields: Please check your input names.");
+            console.log("❌ [DEBUG] Validation Failure: Missing Fields");
+            return res.render('signup', { error: "Transmission failed: All fields are required." });
         }
 
-        const user = new User({ username, email, password });
+        // Check if user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            console.log("❌ [DEBUG] Registration Denied: Duplicate Identity");
+            return res.render('signup', { error: "An alchemist with that email already holds credentials." });
+        }
 
-        console.log("💾 [DEBUG] Attempting save...");
+        // Generate Record
+        const user = new User({ username, email, password });
+        console.log("💾 [DEBUG] Archiving new identity into Vault...");
         await user.save();
 
-        console.log("✅ [DEBUG] User saved!");
+        console.log("✅ [DEBUG] Identity Securely Saved!");
         res.redirect('/signin');
 
     } catch (err) {
-        // 2. THIS IS THE KEY: Print the actual Mongoose error
-        console.error("💥 [DEBUG] Save Failed!");
-        console.error(err.message);
-
-        res.status(400).send("Database Error: " + err.message);
+        console.error("💥 [DEBUG] Database Rejection during Signup:", err.message);
+        res.render('signup', { error: "Database Error: Secure archive initialization failed." });
     }
 });
 
-// GET Signin Page
-router.get('/signin', (req, res) => res.render('signin'));
+// ==========================================
+// AUTHENTICATION PORTS (SIGNIN)
+// ==========================================
 
-// POST Signin Logic
-router.post('/signup', async (req, res) => {
-    // 1. THE TRACER: What is the server actually receiving?
-    console.log("--- INCOMING RECRUIT DATA ---");
-    console.log(req.body);
-
-    try {
-        const { username, email, password } = req.body;
-
-        // 2. Pre-flight check
-        if (!username || !email || !password) {
-            return res.status(400).send("Transmission failed: Missing fields.");
-        }
-
-        const user = new User({ username, email, password });
-        await user.save();
-        res.redirect('/signin');
-
-    } catch (err) {
-        // 3. The actual database error
-        console.error("--- DATABASE REJECTION ---");
-        console.error(err.message);
-        res.status(400).send("Error creating account. Check terminal.");
-    }
-});
-
-// 1. GET: Shows the page (The "View")
+// GET: Display Signin Entrance
 router.get('/signin', (req, res) => {
-    res.render('signin');
+    res.render('signin', { error: null });
 });
 
-// 2. POST: Processes the login (The "Action")
-// This is the "Door" the error message is looking for!
+// POST: Verify Passphrase & Grant Access
 router.post('/signin', async (req, res) => {
-    console.log("📥 [DEBUG] Signin Attempt for:", req.body.email);
+    console.log("📥 [DEBUG] Signin Attempt Processing for:", req.body.email);
 
     try {
         const { email, password } = req.body;
+
+        // Basic verification
+        if (!email || !password) {
+            return res.render('signin', { error: "Transmission failed: Please supply both email and passphrase." });
+        }
+
         const user = await User.findOne({ email });
 
-        // Check if user exists AND if password matches the hash
+        // Check user existence and process bcrypt mapping safely
         if (user && await bcrypt.compare(password, user.password)) {
-            // SUCCESS: Create the session
+            // SUCCESS: Initialize persistent session tracking
             req.session.userId = user._id;
-            console.log("✅ [DEBUG] Vault Unlocked!");
+            console.log("✅ [DEBUG] Vault Unlocked! Access Granted.");
             res.redirect('/modules/dashboard');
         } else {
-            // FAILURE: Wrong credentials
-            console.log("❌ [DEBUG] Invalid Credentials");
-            res.status(401).send("Invalid email or password.");
+            // FAILURE: Mismatched credentials caught inside the template frame
+            console.log("❌ [DEBUG] Authentication Refused: Bad Credentials");
+            res.render('signin', { error: "Invalid email or passphrase. Access to the laboratory is denied." });
         }
     } catch (err) {
-        console.error("💥 [DEBUG] Signin Crash:", err.message);
-        res.status(500).send("The authentication engine is offline.");
+        console.error("💥 [DEBUG] Authentication Core Crash:", err.message);
+        res.render('signin', { error: "The authentication engine encountered an internal system malfunction." });
     }
 });
 
+// ==========================================
+// TERMINATION PORTS (SIGNOUT)
+// ==========================================
 router.get('/signout', (req, res) => {
-    // 1. Destroy the session on the server
+    // 1. Destroy session context on the server instance
     req.session.destroy((err) => {
         if (err) {
-            console.error("💥 [DEBUG] Failed to destroy session:", err);
-            return res.redirect('/pantry'); // If it fails, keep them on the dashboard
+            console.error("💥 [DEBUG] Failed to terminate cloud session container:", err);
+            return res.redirect('/modules/dashboard');
         }
 
-        // 2. Clear the cookie from the browser
-        // Note: 'connect.sid' is the default cookie name for express-session
+        // 2. Wipe identity authorization cookies cleanly from browser cache
         res.clearCookie('connect.sid');
+        console.log("🔒 [DEBUG] Session Terminated. Laboratory Vault Locked.");
 
-        console.log("🔒 [DEBUG] Session Terminated. Vault Locked.");
-
-        // 3. Redirect back to the front door
+        // 3. Drop back to security gate
         res.redirect('/signin');
     });
 });
