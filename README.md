@@ -1,7 +1,14 @@
 
+
 ---
 
 # 🍸 Molecular Mixology: The Digital Speakeasy
+
+<div align="center">
+  <img src="./assets/dashboard.png" alt="The Speakeasy Laboratory Dashboard" width="850"/>
+</div>
+
+<br/>
 
 An elite, high-end web application that bridges the gap between classic mixology, organic chemistry, and artificial intelligence. Built as a secure, full-stack platform, this application allows users to catalog unique chemical reagents, botanicals, and spirits to dynamically synthesize precise molecular cocktail protocols using advanced AI models.
 
@@ -24,32 +31,50 @@ The application is built following rigorous **Separation of Concerns (SoC)**, mo
 
 ## ⚡ Key Engineering Features
 
-### 1. The Alchemist's Deck (`/dashboard`)
+### 1. The Interactive Laboratory Mechanics
+
+The application abandons static forms in favor of dynamic, visual engineering modules. 
+
+<div align="center">
+  <img src="./assets/stratification.png" width="48%" alt="Stratification Engine" />
+  <img src="./assets/botanical_alchemy.png" width="48%" alt="Botanical Alchemy" />
+</div>
+
+<br/>
+
+* **Interactive Viewports:** Features an integrated responsive viewport matrix that instantly introduces unfamiliar users to the underlying core chemistry rules (Specific Gravity profiles, polymer gelation cross-linking, and pH modulation vectors) directly in the UI.
+
+### 2. The Alchemist's Deck (`/dashboard`)
 
 * **Personalized Entry Gateway:** Dynamically hooks into the session storage state on load, resolving the authenticated account's identifier against the MongoDB collection to greet the active user by their custom alias.
-* **Onboarding Subsystems:** Features an integrated responsive viewport matrix that instantly introduces unfamiliar users to the underlying core chemistry rules (Specific Gravity profiles, polymer gelation cross-linking, and pH modulation vectors) directly in the UI.
 
-### 2. The Laboratory & Vault Engine (`/modules/pantry`)
+### 3. The Laboratory & Vault Engine (`/modules/pantry`)
 
 * **Collapsible Vault Drawers:** Condenses a massive list of reagents into clean, native, click-to-open accordion compartments categorized by chemical utility (Acids, Amari, Sugars, Botanicals) to eradicate scrolling fatigue.
 * **Live Reagent Filtering:** A high-performance JavaScript text-matching filter running asynchronously. Typing instantly maps, isolates, and opens relevant category drawers while hiding zero-match categories in real time.
 * **Sticky Command Deck:** A floating navigation control plane designed via CSS boundary-stickiness that stays anchored to the viewport as the alchemist scrolls deeply into the vault.
 
-### 3. The Alchemical Discovery Engine (`/api/generate-formulation`)
+### 4. The Alchemical Discovery Engine (`/api/generate-formulation`)
+
+<div align="center">
+  <img src="./assets/formulated_protocol.png" width="850" alt="Generated Protocol Output" />
+</div>
+
+<br/>
 
 * **Atmospheric Guardrails Mapping:** Enforces an elite lounge narrative context, strictly blacklisting clinical/medical jargon (e.g., *beakers, pipettes, test tubes*) in favor of luxury molecular barware terms (*mixing vessels, precision droppers*). Maps standard beverage configurations (`oz`, `dashes`) against micro-precision chemical additives (`grams`, `ml`).
 * **Dynamic Title Extraction:** Utilizes an integrated RegEx text parsing mechanism to safely scan raw AI markdown streams, capture string variables following the `Protocol Name:` index, and map them explicitly into individual database keys.
 * **Fail-Safe Interceptors:** Custom endpoint try/catch error mapping that translates raw MongoDB drops, network timeout failures, or Gemini quota limits into elegant, context-aware in-app alert frames rather than breaking system layouts.
 
-### 4. The Archives (`/modules/journal`)
+### 5. The Archives (`/modules/journal`)
 
 * **Dossier Print Isolation Engine:** Leverages localized JavaScript tracking triggers coupled with targeted `@media print` CSS overrides. Clicking "Export Dossier" locks onto a single historical record, flattens the UI layout into a high-contrast monochrome layout, and bridges directly to native browser print hardware or localized PDF export engines.
 
-### 5. The System Specifications (`/modules/guide`)
+### 6. The System Specifications (`/modules/guide`)
 
 * **In-App Technical Specifications:** A dedicated, fully authenticated domain manual integrated directly into the core layout template ecosystem. It translates the application's abstract code structures into foundational physical chemistry documentation.
 
-### 6. Credential Gateway (`/signin`, `/signup`)
+### 7. Credential Gateway (`/signin`, `/signup`)
 
 * A customized frosted-glass security gate matching the root layout palette, securing full user session initialization and rendering backend validation exceptions gracefully within the UI viewport rather than throwing flat-text browser drops.
 
@@ -59,6 +84,11 @@ The application is built following rigorous **Separation of Concerns (SoC)**, mo
 
 ```text
 molecular-mixology/
+├── assets/                      # Repository images for README documentation
+│   ├── botanical_alchemy.jpg
+│   ├── dashboard.jpg
+│   ├── formulated_protocol.jpg
+│   └── stratification.jpg
 ├── middleware/
 │   └── auth.js                  # Session validation & security route guards
 ├── models/
@@ -113,6 +143,7 @@ molecular-mixology/
 ├── seed.js                      # Pre-fills database with baseline reagents
 └── server.js                    # Core lifecycle orchestrator & unified /dashboard handler
 
+
 ```
 
 ---
@@ -122,8 +153,9 @@ molecular-mixology/
 ### 1. Clone the Vault
 
 ```bash
-git clone https://github.com/your-username/molecular-mixology.git
+git clone [https://github.com/your-username/molecular-mixology.git](https://github.com/your-username/molecular-mixology.git)
 cd molecular-mixology
+
 
 ```
 
@@ -131,6 +163,7 @@ cd molecular-mixology
 
 ```bash
 npm install
+
 
 ```
 
@@ -144,6 +177,7 @@ MONGO_URI=mongodb://127.0.0.1:27017/molecular_mixology
 SESSION_SECRET=your_secret_speakeasy_passphrase
 GEMINI_API_KEY=your_google_gemini_api_key
 
+
 ```
 
 ### 4. Seed the Database
@@ -153,6 +187,7 @@ Populate your MongoDB database with your core mixology categories and ingredient
 ```bash
 node seed.js
 
+
 ```
 
 ### 5. Initiate Server
@@ -160,6 +195,9 @@ node seed.js
 ```bash
 npm start
 
+
 ```
 
 Open your browser and enter `http://localhost:3000` to breach the entrance gateway.
+
+```
