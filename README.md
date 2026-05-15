@@ -200,4 +200,3 @@ npm start
 
 Open your browser and enter `http://localhost:3000` to breach the entrance gateway.
 
-```
